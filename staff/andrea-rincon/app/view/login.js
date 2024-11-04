@@ -51,8 +51,26 @@ loginForm.onsubmit = function (event) {
 
         homePosts.innerHTML = ''
 
+        posts.forEach(function (post) {
+            var homePost = document.createElement('article')
+            home.Posts.appendChild(homePost)
 
+            var postAuthor = document.createElement('h3')
+            postAuthor.innerText = post.author
+            homePost.appendChild(postAuthor)
 
+            var postAuthor = document.createElement('img')
+            postImage.src = post.Image
+            homePost.appendChild(postImage)
+
+            var postCaption = document.createElement('p')
+            postCaption.innerText = post.text
+            homePost.appendChild(postCaption)
+
+            var postDate = document.createElement('time')
+            postDate.innerText = post.date
+            homePost.appendChild(postDate)
+        });
 
         body.removeChild(loginView)
         body.appendChild(homeView)

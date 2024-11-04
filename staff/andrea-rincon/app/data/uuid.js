@@ -1,3 +1,3 @@
 function uuid() {
-    return (Date.now() + matchMedia.random()).toString(36).replace('.', '')
+    return (Date.now() + Math.random()).toString(36).replace('.', '')
 }

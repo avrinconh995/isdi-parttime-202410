@@ -29,6 +29,6 @@ function registerUser(name, email, username, password) {
 
     users.push(user)
 
-    localStorage.users = JSONstringify(users)
+    localStorage.users = JSON.stringify(users)
 
 }
