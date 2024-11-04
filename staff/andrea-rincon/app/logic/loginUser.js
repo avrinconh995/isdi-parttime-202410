@@ -14,5 +14,5 @@ function loginUser(username, password) {
     if (!user)
         throw new Error('wrong credentials')
 
-    sessionStorage.userId = user.Id
+    sessionStorage.userId = user.id
 }

@@ -53,14 +53,14 @@ loginForm.onsubmit = function (event) {
 
         posts.forEach(function (post) {
             var homePost = document.createElement('article')
-            home.Posts.appendChild(homePost)
+            homePosts.appendChild(homePost)
 
             var postAuthor = document.createElement('h3')
             postAuthor.innerText = post.author
             homePost.appendChild(postAuthor)
 
-            var postAuthor = document.createElement('img')
-            postImage.src = post.Image
+            var postImage = document.createElement('img')
+            postImage.src = post.image
             homePost.appendChild(postImage)
 
             var postCaption = document.createElement('p')
