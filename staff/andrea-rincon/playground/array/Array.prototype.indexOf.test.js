@@ -2,11 +2,11 @@ console.log('TEST Array.prototype.indexOf')
 
 console.log('CASE meet the kids characters of Bluey')
 
-var kidsBluey = ['Bluey', 'Bingo', 'Pompon', 'Indi', 'Coco', 'Chloe']
+var characters = ['Bluey', 'Bingo', 'Pompon', 'Indi', 'Coco', 'Chloe']
 
-console.log(kidsBluey.indexOf('Bingo'))
+console.log(characters.indexOf('Bingo'))
 //1
 
-console.log(kidsBluey.indexOf('Chloe'))
+console.log(characters.indexOf('Chloe'))
 //5
 

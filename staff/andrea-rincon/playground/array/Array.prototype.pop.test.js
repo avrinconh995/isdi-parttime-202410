@@ -12,3 +12,4 @@ console.log(sheriffRemoved)
 
 console.log(sheriff)
 //['Sheriff Labrador', 'Sheriff Dobie', 'Sheriff Papillon']
+
