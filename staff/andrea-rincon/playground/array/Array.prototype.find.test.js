@@ -20,5 +20,21 @@ var city = country.find(function (city) {
 });
 
 console.log(city)
-//{name:'Alemania', city: 'Dusseldorf'},
+//{name:'Alemania', city: 'Dusseldorf'}
+
+console.log('TEST Array.prototype.find')
+
+console.log('CASE Find sponge bob in characters')
+
+var characters = [
+    { name: 'Mickey Mouse', icon: '🐭' },
+    { name: 'Tweety', icon: '🐥' },
+    { name: 'Sponge Bob', icon: '🧽' },
+    { name: 'Coyote', icon: '🦊' }
+]
+var character = characters.find(function (character) {
+    return character.name === 'Sponge Bob'
+})
+console.log(character)
+// { name: 'Sponge bob, icon: '🐥'}
 
