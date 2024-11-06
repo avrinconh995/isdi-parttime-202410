@@ -61,7 +61,7 @@ registerForm.onsubmit = function (event) {
     var password = registerFormPasswordInput.value
 
     try {
-        registerUser(name, email, username, password)
+        logic.registerUser(name, email, username, password)
 
         registerForm.reset()
 

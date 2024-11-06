@@ -1,6 +1,6 @@
 var landingView = document.createElement('main')
 
-if (!isUserLoggedIn())
+if (!logic.isUserLoggedIn())
     body.appendChild(landingView)
 
 var landingTitle = document.createElement('h2')
