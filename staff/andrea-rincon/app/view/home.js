@@ -50,7 +50,7 @@ if (logic.isUserLoggedIn()) {
         homePosts.appendChild(homePost)
 
         var postAuthor = document.createElement('h3')
-        postAuthor.innerText = post.author
+        postAuthor.innerText = post.author.username
         homePost.appendChild(postAuthor)
 
         var postImage = document.createElement('img')
