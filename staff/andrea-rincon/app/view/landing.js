@@ -1,38 +1,43 @@
-var landingView = document.createElement('main')
+class Landing extends Component {
+    constructor() {
+        super(document.createElement('main'))
 
-if (!logic.isUserLoggedIn())
-    body.appendChild(landingView)
+        const title = new Heading(2)
+        title.setText('Welcome!')
+        this.add(title)
 
-var landingTitle = document.createElement('h2')
-landingTitle.innerText = 'WELCOME!'
-landingView.appendChild(landingTitle)
+        const intro = new Paragraph
+        this.add(intro)
 
-var landingIntro = document.createElement('p')
-landingView.appendChild(landingIntro)
+        const registerLink = new Link
+        registerLink.setText('Register')
+        intro.add(registerLink)
 
-var landingRegisterLink = document.createElement('a')
-landingRegisterLink.href = ''
-landingRegisterLink.innerText = 'Register'
-landingIntro.appendChild(landingRegisterLink)
+        const orText = new Text(' or ')
+        intro.add(orText)
 
-landingRegisterLink.onclick = function (event) {
-    event.preventDefault()
+        const loginLink = new Link
+        loginLink.setText('Login')
+        intro.add(loginLink)
+    }
 
-    body.removeChild(landingView)
-    body.appendChild(registerView)
-}
+    onRegisterClick(callback) {
+        const registerLink = this.children[1].children[0]
 
-var landingIntroOrText = new Text(' or ')
-landingIntro.appendChild(landingIntroOrText)
+        registerLink.addBehavior('click', event => {
+            event.preventDefault()
 
-var landingLoginLink = document.createElement('a')
-landingLoginLink.href = ''
-landingLoginLink.innerText = 'Login'
-landingIntro.appendChild(landingLoginLink)
+            callback()
+        })
+    }
 
-landingLoginLink.onclick = function (event) {
-    event.preventDefault()
+    onLoginClick(callback) {
+        const loginLink = this.children[1].children[2]
 
-    body.removeChild(landingView)
-    body.appendChild(loginView)
+        loginLink.addBehavior('click', event => {
+            event.preventDefault()
+
+            callback()
+        })
+    }
 }
