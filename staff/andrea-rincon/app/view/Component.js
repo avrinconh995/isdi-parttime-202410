@@ -14,7 +14,8 @@ class Component {
     remove(component) {
         const index = this.children.findIndex(child => child === component)
 
-        if (index < 0) throw new Error('child not found')
+        if (index < 0)
+            throw new Error('child not found')
         else
             this.children.splice(index, 1)
 
@@ -22,6 +23,7 @@ class Component {
     }
 
     addBehavior(type, callback) {
-        this.container.addEventListener(type, callback)
+        this.container.addEventListener
+            (type, callback)
     }
 }

@@ -13,14 +13,14 @@ class Register extends Component {
         nameLabel.setText('Name')
         form.add(nameLabel)
 
-        const nameInput = new Input('text')
+        const nameInput = new Input('text', 'name')
         form.add(nameInput)
 
         const emailLabel = new Label('email')
         emailLabel.setText('E-mail')
         form.add(emailLabel)
 
-        const emailInput = new Input('email')
+        const emailInput = new Input('email', 'email')
         form.add(emailInput)
 
         const usernameLabel = new Label('username')
@@ -53,6 +53,36 @@ class Register extends Component {
             event.preventDefault()
 
             callback()
+        })
+    }
+
+    onRegistered(callback) {
+        const form = this.children[1]
+
+        form.addBehavior('submit', event => {
+            event.preventDefault()
+
+            const nameInput = form.children[1]
+            const emailInput = form.children[3]
+            const usernameInput = form.children[5]
+            const passwordInput = form.children[7]
+
+            const name = nameInput.getValue()
+            const email = emailInput.getValue()
+            const username = usernameInput.getValue()
+            const password = passwordInput.getValue()
+
+            try {
+                logic.registerUser(name, email, username, password)
+
+                form.clear()
+
+                callback()
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
         })
     }
 }

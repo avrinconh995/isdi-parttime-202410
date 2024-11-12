@@ -25,13 +25,41 @@ class App extends Component {
             this.add(register)
         })
 
+        login.onRegisterClick(() => {
+            this.remove(login)
+            this.add(register)
+        })
+
+        login.onLoggedIn(() => {
+            try {
+                const name = logic.getUserName()
+                home.setUserName(name)
+
+                this.remove(login)
+                this.add(home)
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+        })
+
         const register = new Register
         register.onLoginClick(() => {
             this.remove(register)
             this.add(login)
         })
 
-        // const home = new Home
-        // this.add(home)
+        register.onRegistered(() => {
+            this.remove(register)
+            this.add(login)
+        })
+
+        const home = new Home
+
+        home.onLoggedOut(() => {
+            this.remove(home)
+            this.add(login)
+        })
     }
 }

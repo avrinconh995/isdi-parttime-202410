@@ -5,4 +5,8 @@ class Input extends Component {
         this.container.type = type
         this.container.id = id
     }
+
+    getValue() {
+        return this.container.value
+    }
 }

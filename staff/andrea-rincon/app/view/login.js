@@ -29,7 +29,7 @@ class Login extends Component {
 
         const registerLink = new Link
         registerLink.setText('Register')
-        this.add(submitButton)
+        this.add(registerLink)
     }
 
     onRegisterClick(callback) {
@@ -42,7 +42,32 @@ class Login extends Component {
         })
     }
 
-    onLoginSubmit(callback) {
-        //?
+
+    onLoggedIn(callback) {
+        const form = this.children[1]
+
+        form.addBehavior('submit', event => {
+            event.preventDefault()
+
+            const usernameInput = form.children[1]
+            const passwordInput = form.children[3]
+
+            const username = usernameInput.getValue()
+
+            const password = passwordInput.getValue()
+
+            try {
+                logic.loginUser(username, password)
+
+                form.clear()
+
+                callback()
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+        })
     }
+
 }
