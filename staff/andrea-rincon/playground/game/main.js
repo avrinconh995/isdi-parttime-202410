@@ -1,23 +1,23 @@
 var root = document.body.querySelector('#root')
 
 //fondo
-var body = document.body;
-body.style.margin = '0';
-body.style.padding = '0';
-body.style.backgroundSize = 'cover';
-body.style.width = '100%';
-body.style.height = '100vh';
-body.style.backgroundImage = 'url("images/Patiobluey.png")';
-body.style.backgroundPosition = 'center';
-body.style.backgroundRepeat = 'no-repeat';
+// var body = document.body;
+// body.style.margin = '0';
+// body.style.padding = '0';
+// body.style.backgroundSize = 'cover';
+// body.style.width = '100%';
+// body.style.height = '100vh';
+// body.style.backgroundImage = 'url("images/Patiobluey.png")';
+// body.style.backgroundPosition = 'center';
+// body.style.backgroundRepeat = 'no-repeat';
 
 
-//root.style.backgroundImage = 'url("images/Patiobluey.png")';
-//root.style.backgroundSize = 'cover';
-//root.style.backgroundPosition = 'center';
-//root.style.backgroundRepeat = 'no-repeat';
-//root.style.width = '100%';  // Asegúrate de que el contenedor ocupe todo el ancho
-//root.style.height = '100vh';
+root.style.backgroundImage = 'url("images/Patiobluey.png")';
+root.style.backgroundSize = 'cover';
+root.style.backgroundPosition = 'center';
+root.style.backgroundRepeat = 'no-repeat';
+root.style.width = '100%';  // Asegúrate de que el contenedor ocupe todo el ancho
+root.style.height = '100vh';
 
 var bluey = new Thing(document.createElement('div'))
 bluey.setSize(200, 100)
@@ -90,7 +90,7 @@ bingoJumpImage.style.width = '550px'
 bingoJumpImage.style.position = 'absolute'
 //bingo.appendChild(bingoJumpImage)
 
-bingo.setXY(0, 300)
+bingo.setXY(0, 500)
 
 var STEP = 10
 
