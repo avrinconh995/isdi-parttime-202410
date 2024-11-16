@@ -22,6 +22,12 @@ class Component {
         this.container.removeChild(component.container)
     }
 
+    removeAll() {
+        this.children.length = 0
+
+        this.container.innerHTML = ''
+    }
+
     addBehavior(type, callback) {
         this.container.addEventListener
             (type, callback)
