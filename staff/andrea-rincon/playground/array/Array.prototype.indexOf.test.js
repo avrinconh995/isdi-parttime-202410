@@ -1,4 +1,5 @@
 console.log('TEST Array.prototype.indexOf')
+//El indexOf() devuelve el primer índice en el que se puede encontrar un elemento dado en la matriz, o -1 si no está presente.
 
 console.log('CASE meet the kids characters of Bluey')
 

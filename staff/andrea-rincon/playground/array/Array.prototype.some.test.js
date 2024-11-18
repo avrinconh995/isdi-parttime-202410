@@ -1,4 +1,5 @@
 console.log('TEST Array.prototype.some')
+//El método some() comprueba si al menos un elemento del array cumple con la condición implementada por la función proporcionada.
 
 console.log('CASE check if Fiat Punto exist in cars array')
 

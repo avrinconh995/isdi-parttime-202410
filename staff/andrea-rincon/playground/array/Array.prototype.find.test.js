@@ -38,3 +38,16 @@ var character = characters.find(function (character) {
 console.log(character)
 // { name: 'Sponge bob, icon: '🐥'}
 
+console.log('CASE Find pink panther in characters')
+
+var characters = [
+    { name: 'Mickey Mouse', icon: '🐭' },
+    { name: 'Tweety', icon: '🐥' },
+    { name: 'Sponge Bob', icon: '🧽' },
+    { name: 'Coyote', icon: '🦊' }
+]
+var character = characters.find(function (character) {
+    return character.name === 'pink panther'
+})
+console.log(character)
+// undefined
