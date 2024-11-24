@@ -1,0 +1,1 @@
+logic.getuserId = () => sessionStorage.userId || null
