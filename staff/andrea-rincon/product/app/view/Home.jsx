@@ -47,8 +47,7 @@ class Home extends Component {
             <button type="button" onClick={() => this.setState({ view: 'create-post' })}>+</button>
 
             {this.state.view === 'posts' && <Posts />}
-
-
+            {this.state.view === 'create-post' && <CreatePost onPostCreated={() => this.setState({ view: 'posts' })} />}
 
         </main>
     }
