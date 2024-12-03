@@ -3,24 +3,16 @@ const express = require('express')
 const server = express()
 
 const logic = require('./logic/index')
-const { parseCookies } = require('./util/index')
 
 const PORT = 8080
 
-server.get('/helloworld', (req, res) => {
-    res.send('Hello, form Server!')
-})
-
 server.get('/login', (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)
-
-    const { userId } = cookies
-
-    if (userId) {
+    if (logic.isUserLoggedIn()) {
         res.redirect('/')
 
         return
     }
+
 
     res.send(`<doctype html>
 <html>
@@ -52,9 +44,7 @@ server.post('/login', express.urlencoded({ extended: true }), (req, res) => {
     // const password = req.body.password
 
     try {
-        const userId = logic.authenticateUser(username, password)
-
-        res.setHeader('Set-Cookie', `userId=${userId}`)
+        logic.loginUser(username, password)
 
         res.redirect('/')
     } catch (error) {
@@ -63,11 +53,7 @@ server.post('/login', express.urlencoded({ extended: true }), (req, res) => {
 })
 
 server.get('/', (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)
-
-    const { userId } = cookies
-
-    if (!userId) {
+    if (!logic.isUserLoggedIn()) {
         res.redirect('/login')
 
         return
@@ -76,7 +62,7 @@ server.get('/', (req, res) => {
     let name
 
     try {
-        name = logic.getUserName(userId)
+        name = logic.getUserName()
     } catch (error) {
         res.status(400).send(error.message)
 
@@ -102,21 +88,17 @@ server.get('/', (req, res) => {
 })
 
 server.post('/logout', (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)
+    try {
+        logic.logoutUser()
 
-    const { userId } = cookies
-
-    res.setHeader('Set-Cookie', `userId=${userId}; Max-Age=0`)
-
-    res.redirect('/login')
+        res.redirect('/login')
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
 })
 
 server.get('/register', (req, res) => {
-    const cookies = parseCookies(req.headers.cookies)
-
-    const { userId } = cookies
-
-    if (userId) {
+    if (logic.isUserLoggedIn()) {
         res.redirect('/')
 
         return
