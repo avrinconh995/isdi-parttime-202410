@@ -23,6 +23,7 @@ const validate = {
         if (typeof id !== 'string') throw new Error(`invalid ${explain} type`)
         if (id.length < 10) throw new Error(`invalid ${explain} length`)
     }
+
 }
 
 export default validate

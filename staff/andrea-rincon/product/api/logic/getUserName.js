@@ -7,7 +7,7 @@ const getUserName = userId => {
     validate.id(userId, 'userId')
 
     const { users } = db
-
+    //const users = db.users (localStoragge)
     const user = users.find(user => user.id === userId)
 
     if (!user) throw new Error('user not found')
