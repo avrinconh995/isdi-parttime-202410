@@ -1,7 +1,12 @@
 import db from '../data/db.js'
 
+
 const getPosts = userId => {
     const { users, posts } = db
+
+    const user = users.find(user => user.id === userId)
+
+    if (!user) throw new Error('user not found')
 
     posts.forEach(post => {
         const authorId = post.author

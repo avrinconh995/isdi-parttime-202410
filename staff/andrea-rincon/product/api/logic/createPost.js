@@ -4,8 +4,9 @@ import validate from './helper/validate.js'
 
 const createPost = (userId, image, text) => {
     validate.id(userId, 'userId')
-    if (typeof image !== 'string') throw Error('invalid image type')
-    if (typeof text !== 'string') throw Error('invalid text type')
+    validate.image(image)
+    validate.text(text)
+
 
     const { posts } = db
 
