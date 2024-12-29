@@ -8,7 +8,7 @@ const api = express()
 
 const jsonBodyParser = express.json()
 
-api.get('/helloworld', (req, res) => res.send('HELLO,API!'))
+api.get('/', (req, res) => res.send('HELLO,API!'))
 
 api.post('/users', jsonBodyParser, (req, res) => {
     try {
