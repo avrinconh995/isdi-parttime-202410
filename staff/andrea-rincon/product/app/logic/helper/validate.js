@@ -22,6 +22,13 @@ const validate = {
     id(id, explain = 'id') {
         if (typeof id !== 'string') throw new Error(`invalid ${explain} type`)
         if (id.length < 10) throw new Error(`invalid ${explain} length`)
+    },
+    image(image) {
+        if (typeof image !== 'string') throw Error('invalid image type')
+    },
+
+    text(text) {
+        if (typeof text !== 'string') throw Error('invalid text type')
     }
 
 }

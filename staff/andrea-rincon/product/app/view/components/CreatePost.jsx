@@ -23,8 +23,13 @@ class CreatePost extends Component {
 
                 try {
                     logic.createPost(image, text)
+                        .then(() => this.props.onPostCreated())
+                        .catch(error => {
+                            alert(error.message)
+                            console.error(error)
+                        })
 
-                    this.props.onPostCreated()
+
                 } catch (error) {
                     alert(error.message)
 

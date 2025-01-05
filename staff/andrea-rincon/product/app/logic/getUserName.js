@@ -1,11 +1,24 @@
 logic.getUserName = () => {
+    return fetch('http://localhost:8080/users', {
+        method: 'GET',
+        headers: {
+            Authorization: `Basic ${sessionStorage.userId}`
+        }
+    })
+        .catch(error => { throw new Error(error.message) })
+        .then(res => {
+            const { status } = res
 
-    const users = JSON.parse(localStorage.users)
+            if (status === 200)
+                return res.json()
+                    .then(name => name)
 
-    const user = users.find(user => user.id === sessionStorage.userId)
+            return res.json()
+                .then(body => {
+                    const { error, message } = body
 
-    if (!user) throw new Error('user not found')
-
-    return user.name
+                    throw new Error(message)
+                })
+        })
 }
 

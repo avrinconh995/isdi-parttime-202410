@@ -13,10 +13,14 @@ class Home extends Component {
         console.log('Home -> componentDidMount')
 
         try {
-            const name = logic.getUserName()
+            logic.getUserName()
+                .then(name => { this.setState({ name }) })
+                .catch(error => {
+                    alert(error.message)
 
+                    console.error(error)
+                })
 
-            this.setState({ name })
         } catch (error) {
             alert(error.message)
 

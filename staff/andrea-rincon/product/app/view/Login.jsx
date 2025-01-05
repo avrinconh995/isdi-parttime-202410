@@ -23,10 +23,18 @@ class Login extends Component {
 
                 try {
                     logic.loginUser(username, password)
+                        .then(() => {
+                            form.reset()
 
-                    form.reset()
+                            this.props.onUserLoggedIn()
+                        })
+                        .catch(error => {
+                            alert(error.message)
 
-                    this.props.onUserLoggedIn()
+                            console.error(error)
+                        })
+
+
                 } catch (error) {
                     alert(error.message)
 

@@ -13,10 +13,13 @@ class Posts extends Component {
         console.log('Posts -> componentDidMount')
 
         try {
-            const posts = logic.getPosts()
+            logic.getPosts()
+                .then(posts => this.setState({ posts }))
+                .catch(error => {
+                    alert(error.message)
 
-            this.setState({ posts })
-
+                    console.error(error)
+                })
         } catch (error) {
             alert(error.message)
 
@@ -31,7 +34,7 @@ class Posts extends Component {
 
         return <section>
             {this.state.posts.map(post =>
-                <Post post={post} onPostDeleted={() => {
+                <Post key={post.id} post={post} onPostDeleted={() => {
                     try {
                         const posts = logic.getPosts()
 
