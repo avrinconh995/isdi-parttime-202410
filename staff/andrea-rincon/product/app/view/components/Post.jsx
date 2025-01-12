@@ -1,39 +1,32 @@
-const Component = React.Component
+function Post(props) {
+    const handleDeleteButtonClick = () => {
+        if (confirm('Delete post?'))
+            try {
+                logic.deletePost(props.post.id)
 
-class Post extends Component {
-    constructor(props) {
-        console.log('Post -> constructor')
+                props.onPostDeleted()
+            } catch (error) {
+                alert(error.message)
 
-        super(props)
+                console.error(error)
+
+            }
     }
 
-    render() {
-        console.log('Post -> render')
+    console.log('Post -> render')
 
-        return <article>
-            <h3>{this.props.post.author.username}</h3>
+    return <article>
+        <h3>{props.post.author.username}</h3>
 
-            <img src={this.props.post.image} />
+        <img src={props.post.image} />
 
-            <p>{this.props.post.text}</p>
+        <p>{props.post.text}</p>
 
-            <time>{this.props.post.date}</time>
+        <time>{props.post.date}</time>
 
-            {this.props.post.own && <button type="button" onClick={() => {
-                if (confirm('Delete post?'))
-                    try {
-                        logic.deletePost(this.props.post.id)
-
-                        this.props.onPostDeleted()
-                    } catch (error) {
-                        alert(error.message)
-
-                        console.error(error)
-
-                    }
-            }}>🗑️</button>}
-        </article>
-    }
+        {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
+    </article>
 }
+
 
 

@@ -1,24 +1,26 @@
-const Component = React.Component
+const { useState } = React
 
-class App extends Component {
-    constructor(props) {
-        console.log('App -> constructor')
+function App() {
+    const [view, setView] = useState(logic.isUserLoggedIn() ? 'home' : 'landing')
 
-        super(props)
+    console.log('App -> render')
 
-        this.state = { view: logic.isUserLoggedIn() ? 'home' : 'landing' }
-    }
+    const handleRegisterClick = () => setView('register')
 
-    render() {
-        console.log('App -> render')
+    const handleLoginClick = () => setView('login')
 
-        return <>
-            <h1>Hola, App!</h1>
+    const handleUserLoggedIn = () => setView('home')
 
-            {this.state.view === 'landing' && <Landing onRegisterClicked={() => this.setState({ view: 'register' })} onLoginClicked={() => this.setState({ view: 'login' })} />}
-            {this.state.view === 'login' && <Login onRegisterClicked={() => this.setState({ view: 'register' })} onUserLoggedIn={() => this.setState({ view: 'home' })} />}
-            {this.state.view === 'register' && <Register onLoginClicked={() => this.setState({ view: 'login' })} onUserRegistered={() => this.setState({ view: 'login' })} />}
-            {this.state.view === 'home' && <Home onUserLoggedOut={() => this.setState({ view: 'login' })} />}
-        </>
-    }
+    const handleUserRegistered = () => setView('login')
+
+    const handleUserLoggedOut = () => setView('login')
+
+    return <>
+        <h1>Hola, App!</h1>
+
+        {view === 'landing' && <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />}
+        {view === 'login' && <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />}
+        {view === 'register' && <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />}
+        {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
+    </>
 }
