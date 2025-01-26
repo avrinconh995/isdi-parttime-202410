@@ -60,3 +60,5 @@ function Register(props) {
         <a href="" onClick={handleLoginLinkClick}>Login</a>
     </main>
 }
+
+export default Register

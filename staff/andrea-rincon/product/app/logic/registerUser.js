@@ -1,4 +1,6 @@
-logic.registerUser = (name, email, username, password) => {
+import validate from './helper/validate'
+
+const registerUser = (name, email, username, password) => {
     validate.name(name)
     validate.email(email)
     validate.username(username)
@@ -26,3 +28,5 @@ logic.registerUser = (name, email, username, password) => {
 
         })
 }
+
+export default registerUser

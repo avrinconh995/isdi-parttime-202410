@@ -1,3 +1,5 @@
+import logic from '../logic'
+
 function Login(props) {
     console.log('Login -> render')
 
@@ -51,3 +53,5 @@ function Login(props) {
         <a href="" onClick={handleRegisterLinkClick}>Register</a>
     </main>
 }
+
+export default Login

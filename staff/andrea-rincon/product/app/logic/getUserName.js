@@ -1,4 +1,4 @@
-logic.getUserName = () => {
+const getUserName = () => {
     return fetch('http://localhost:8080/users', {
         method: 'GET',
         headers: {
@@ -22,3 +22,4 @@ logic.getUserName = () => {
         })
 }
 
+export default getUserName

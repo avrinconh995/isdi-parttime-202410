@@ -1,9 +1,17 @@
+import mongoose from 'mongoose'
 import registerUser from './registerUser.js'
 
-try {
-    registerUser('Zana Horia', 'zana@horia.com', 'zanahoria', '123123123')
+mongoose.connect('mongodb://localhost:27017/test')
+    .then(() => {
 
-    console.log('user registered')
-} catch (error) {
-    console.error(error)
-}
+        try {
+            registerUser('Zana Horia', 'zana@horia.com', 'zanahoria', '123123123')
+                .then(result => console.log('user registered', result))
+                .catch(error => console.error(error))
+
+
+        } catch (error) {
+            console.error(error)
+        }
+    })
+    .catch(error => console.error(error))

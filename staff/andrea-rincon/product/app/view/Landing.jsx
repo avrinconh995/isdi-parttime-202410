@@ -1,3 +1,4 @@
+
 function Landing(props) {
     console.log('Landing -> render')
 
@@ -19,3 +20,5 @@ function Landing(props) {
         <p><a href="" onClick={handleRegisterLinkClick}>Register</a> or <a href="" onClick={handleLoginLinkClick}>Login</a></p>
     </main>
 }
+
+export default Landing

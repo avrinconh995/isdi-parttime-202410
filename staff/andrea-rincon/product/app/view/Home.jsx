@@ -1,4 +1,10 @@
-const { useState, useEffect } = React
+import { useState, useEffect } from 'react'
+
+import logic from '../logic'
+
+import Posts from './components/Posts'
+import CreatePost from './components/CreatePost'
+
 
 function Home(props) {
     //this.state = { name: null, view: 'posts' }
@@ -61,3 +67,5 @@ function Home(props) {
 
     </main>
 }
+
+export default Home

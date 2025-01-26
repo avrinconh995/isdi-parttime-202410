@@ -1,3 +1,5 @@
+import logic from '../../logic'
+
 function Post(props) {
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
@@ -28,5 +30,5 @@ function Post(props) {
     </article>
 }
 
-
+export default Post
 
