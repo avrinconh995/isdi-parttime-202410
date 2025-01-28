@@ -1,0 +1,17 @@
+.Post {
+    border: 1px solid blue;
+    padding: 5px;
+}
+
+.Post-author {
+    margin: 0;
+
+}
+
+.Post-text {
+    margin: 0;
+}
+
+.Post-image {
+    width: 100%;
+}

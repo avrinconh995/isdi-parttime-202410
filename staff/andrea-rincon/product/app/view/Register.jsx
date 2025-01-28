@@ -1,3 +1,6 @@
+import './Register.css'
+
+import logic from '../logic'
 
 function Register(props) {
     console.log('Register -> render')
@@ -38,9 +41,9 @@ function Register(props) {
     }
 
     return <main>
-        <h2>Register</h2>
+        <h2 className="Register-title">Register</h2>
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} >
 
             <label htmlFor="name">Name</label>
             <input type="text" id="name" />

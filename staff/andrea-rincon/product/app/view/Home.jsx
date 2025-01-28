@@ -1,3 +1,5 @@
+import './Home.css'
+
 import { useState, useEffect } from 'react'
 
 import logic from '../logic'

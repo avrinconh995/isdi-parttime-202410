@@ -1,9 +1,16 @@
+import mongoose from 'mongoose'
 import authenticateUser from './authenticateUser.js'
 
-try {
-    const userId = authenticateUser('zanahoria', '123123123')
+mongoose.connect('mongodb://localhost:27017/test')
+    .then(() => {
+        try {
+            authenticateUser('zanahoria', '123123123')
+                .then(userId => console.log('user authenticated', userId))
+                .catch(error => console.error(error))
 
-    console.log(userId)
-} catch (error) {
-    console.error(error)
-}
+
+        } catch (error) {
+            console.error(error)
+        }
+    })
+    .catch(error => console.error)

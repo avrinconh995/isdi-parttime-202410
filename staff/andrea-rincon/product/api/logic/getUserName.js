@@ -1,18 +1,19 @@
 import validate from './helper/validate.js'
 
-import db from '../data/db.js'
+import { User } from '../data/models.js'
+
 
 
 const getUserName = userId => {
     validate.id(userId, 'userId')
 
-    const { users } = db
-    //const users = db.users (localStoragge)
-    const user = users.find(user => user.id === userId)
+    return User.findById(userId)
+        .then(user => {
+            if (!user) throw new Error('user not found')
 
-    if (!user) throw new Error('user not found')
+            return user.name
 
-    return user.name
+        })
 }
 
 export default getUserName

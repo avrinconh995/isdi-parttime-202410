@@ -1,3 +1,5 @@
+import './Login.css'
+
 import logic from '../logic'
 
 function Login(props) {
@@ -38,9 +40,9 @@ function Login(props) {
     }
 
     return <main>
-        <h2>Login</h2>
+        <h2 className="Login-title">Login</h2>
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} >
             <label htmlFor="username">Username</label>
             <input type="text" id="username" />
 

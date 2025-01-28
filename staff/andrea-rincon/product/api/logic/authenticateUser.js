@@ -1,19 +1,18 @@
-import validate from "./helper/validate.js"
-import db from '../data/db.js'
+import validate from './helper/validate.js'
+import { User } from '../data/models.js'
 
 
 const authenticateUser = (username, password) => {
     validate.username(username)
     validate.password(password)
 
-    const { users } = db
+    return User.findOne({ username, password })
+        .then(user => {
+            if (!user) throw new Error('wrong credentials')
 
-    const user = users.find(user => user.username === username && user.password === password)
+            return user._id.toString()
+        })
 
-    if (!user)
-        throw new Error('wrong credentials')
-
-    return user.id
 }
 
 export default authenticateUser

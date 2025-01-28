@@ -1,8 +1,14 @@
+import mongoose from 'mongoose'
 import deletePost from './deletePost.js'
 
-try {
-    deletePost('m2w92r8h09', 'm4hgwag2z3f')
-    console.log('post deleted')
-} catch (error) {
-    console.error(error)
-}
+mongoose.connect('mongodb://localhost:27017/test')
+    .then(() => {
+        try {
+            deletePost('6797b9974892c9bce73a6f7f', '6797b9974892c9bce73a6f80')
+                .then(result => console.log('post deleted', result))
+                .catch(error => console.error(error))
+        } catch (error) {
+            console.error(error)
+        }
+    })
+    .catch(error => console.error(error))

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+* {
+    font-family: Audiowide;
+    color: rgb(30, 58, 138);
+    background-color: rgb(128, 200, 255);
+}
+
+body {
+    background-color: #B0E0E6;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input,
+button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #483D8B;
+}
+
+input,
+button,
+label,
+a {
+    font-size: 20px;
+}
+
+button {
+    background-color: rgb(26, 43, 87);
+    color: rgb(160, 216, 255);
+}
