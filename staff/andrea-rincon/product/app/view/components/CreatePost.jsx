@@ -24,11 +24,14 @@ function CreatePost(props) {
             console.error(error)
         }
     }
+
+    const handleCancelButtonClick = () => props.onCancel()
+
     console.log('CreatePost -> render')
 
-    return <section>
-        <h3>Create Post</h3>
-        <form onSubmit={handleFormSubmit}>
+    return <section className="CreatePost-content">
+        <h3 >Create Post</h3>
+        <form onSubmit={handleFormSubmit} className="Create-form" >
 
             <label for="image">Image</label>
             <input type="url" id="image" />
@@ -36,8 +39,9 @@ function CreatePost(props) {
             <label for="text">Text</label>
             <input type="text" id="text" />
 
-            <button type="submit">Create</button>
+            <button className="CreatePost-button" type="submit">Create</button>
         </form>
+        <button className="Cancel-button" onClick={handleCancelButtonClick}>Cancel</button>
     </section>
 }
 

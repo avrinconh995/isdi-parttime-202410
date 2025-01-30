@@ -3,18 +3,19 @@
 * {
     font-family: Audiowide;
     color: rgb(30, 58, 138);
-    background-color: rgb(128, 200, 255);
 }
+
 
 body {
-    background-color: #B0E0E6;
-
+    padding: 0;
 }
+
 
 .form {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    margin-botton: 10px;
 }
 
 input,
@@ -29,6 +30,7 @@ button,
 label,
 a {
     font-size: 20px;
+
 }
 
 button {

@@ -1,0 +1,9 @@
+.Landing {
+    display: center;
+}
+
+.Landing-click {
+    display: flex;
+    padding-left: 20px;
+
+}

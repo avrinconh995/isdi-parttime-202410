@@ -1,3 +1,4 @@
+import './Landing.css'
 
 function Landing(props) {
     console.log('Landing -> render')
@@ -14,11 +15,13 @@ function Landing(props) {
         props.onLoginClicked()
     }
 
-    return <main>
+    return <div className="Landing">
         <h2>Welcome!</h2>
 
-        <p><a href="" onClick={handleRegisterLinkClick}>Register</a> or <a href="" onClick={handleLoginLinkClick}>Login</a></p>
-    </main>
-}
+        <div className="Landing-click">
+            <p><a href="" onClick={handleRegisterLinkClick}>Register</a> or <a href="" onClick={handleLoginLinkClick}>Login</a></p>
+        </div>
+    </div>
 
+}
 export default Landing

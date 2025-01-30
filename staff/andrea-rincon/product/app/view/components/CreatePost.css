@@ -1,0 +1,18 @@
+.CreatePost-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.Create-post-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(30, 58, 138);
+    color: white;
+    border: none;
+    text-decoration: none;
+    padding: 0;
+    font-size: 20px;
+
+}

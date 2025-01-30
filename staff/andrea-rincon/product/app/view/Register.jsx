@@ -40,10 +40,10 @@ function Register(props) {
         props.onLoginClicked()
     }
 
-    return <main>
+    return <main className="Register-Content">
         <h2 className="Register-title">Register</h2>
 
-        <form onSubmit={handleFormSubmit} >
+        <form onSubmit={handleFormSubmit} className="Register-form" >
 
             <label htmlFor="name">Name</label>
             <input type="text" id="name" />
@@ -57,10 +57,12 @@ function Register(props) {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" />
 
-            <button type="submit">Register</button>
+            <div className="Register-button-container">
+                <button type="submit">Register</button>
+            </div>
         </form>
 
-        <a href="" onClick={handleLoginLinkClick}>Login</a>
+        <a href="" className="Register-LoginLink" onClick={handleLoginLinkClick}>Login</a>
     </main>
 }
 

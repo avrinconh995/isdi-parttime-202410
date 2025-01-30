@@ -1,17 +1,28 @@
 .Post {
-    border: 1px solid blue;
+    border: 1px solid black;
     padding: 5px;
+    background-color: white;
 }
 
 .Post-author {
     margin: 0;
+}
 
+.Post-image {
+    width: 100%;
 }
 
 .Post-text {
     margin: 0;
 }
 
-.Post-image {
-    width: 100%;
+.Post-date {
+    font-size: 14px;
+    color: rgb(30, 58, 138)
+}
+
+.Post-bottom {
+    display: flex;
+    align-items: center;
+
 }
