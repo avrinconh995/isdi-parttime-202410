@@ -1,4 +1,4 @@
-const logoutUser = () => { delete sessionStorage.userId }
+const logoutUser = () => { delete sessionStorage.token }
 
 export default logoutUser
 

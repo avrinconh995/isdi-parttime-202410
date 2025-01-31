@@ -1,15 +1,16 @@
 import db from '../data/db.js'
 import { User, Post } from '../data/models.js'
+import validate from './helper/validate.js'
 
 
 const getPosts = userId => {
-    const { users, posts } = db
+    validate.id(userId, 'userId')
 
     return User.findById(userId)
         .then(user => {
             if (!user) throw new Error('user not found')
 
-            return Post.find().populate('author', 'username').lean()
+            return Post.find().populate('author', 'username').sort('-date').lean()
                 .then(posts => {
                     posts.forEach(post => {
                         post.id = post._id.toString()
@@ -21,8 +22,7 @@ const getPosts = userId => {
                             post.author.id = post.author._id.toString()
                             delete post.author._id
                         }
-                        post.own = post.author.id === userId
-
+                        post.own = userId === post.author.id
                     })
 
                     return posts
