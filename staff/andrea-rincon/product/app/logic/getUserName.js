@@ -1,5 +1,5 @@
 const getUserName = () => {
-    return fetch('http://localhost:8080/users', {
+    return fetch(`${import.meta.env.VITE_API_URL}/users`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${sessionStorage.token}`

@@ -7,7 +7,7 @@ fetch('http://localhost:8080/users', {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: '{"name":"Zana Horia","email":"zana@horia.com","username":"zanahoria","password":"123123123"}'
+    body: '{"name":"Ban dit","email":"ban@dit.com","username":"bandit","password":"123123123"}'
 })
     //*callback
     .then(res => {

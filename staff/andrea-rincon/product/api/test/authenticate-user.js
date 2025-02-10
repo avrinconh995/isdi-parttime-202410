@@ -3,7 +3,7 @@ fetch('http://localhost:8080/users/auth ', {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: '{"username":"peterpan","password":"123123123"}'
+    body: '{"username":"bluey","password":"123123123"}'
 })
 
     .then(res => {
@@ -11,7 +11,7 @@ fetch('http://localhost:8080/users/auth ', {
 
         if ('OK', status === 200)
             return res.json()
-                .then(body => console.log(status, body))
+                .then(body => console.log('OK', status, body))
 
         return res.json()
             .then(body => console.log('KO', status, body))

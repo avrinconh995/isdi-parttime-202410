@@ -3,7 +3,7 @@ import validate from './helper/validate'
 const deletePost = postId => {
     validate.id(postId, 'postId')
 
-    return fetch(`http://localhost:8080/posts/${postId}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${sessionStorage.token}`,

@@ -1,14 +1,17 @@
+import 'dotenv/config'
 import mongoose from 'mongoose'
 import express from 'express'
 import cors from 'cors'
 import jwt from 'jsonwebtoken'
 
 import logic from './logic/index.js'
+import errors from './errors/index.js'
 
-const PORT = 8080
-const SECRET = 'quique se come las S'
 
-const connectToDb = () => mongoose.connect('mongodb://localhost:27017/test').then(() => console.log('DB connected'))
+const { ValidateError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors
+
+
+const connectToDb = () => mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'))
 
 
 const startApi = () => {
@@ -26,9 +29,20 @@ const startApi = () => {
 
             logic.registerUser(name, email, username, password)
                 .then(() => res.status(201).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof DuplicityError)
+                        res.status(409).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                })
+
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidateError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.constructor.name, message: error.message })
         }
     })
 
@@ -41,15 +55,24 @@ const startApi = () => {
 
                     const payload = { sub: userId }
 
-                    const token = jwt.sign(payload, SECRET)
+                    const token = jwt.sign(payload, process.env.JWT_SECRET)
 
                     res.json(token)
                 })
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof CredentialsError)
+                        res.status(401).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.constructor.name, message: error.message })
+                })
 
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
-
+            if (error instanceof ValidateError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -57,15 +80,25 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7) //Bearer token
 
-            const payload = jwt.verify(token, SECRET)
+            const payload = jwt.verify(token, process.env.JWT_SECRET)
 
             const { sub: userId } = payload
 
             logic.getUserName(userId)
                 .then(name => res.json(name))
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: error.SystemError.name, message: error.message })
         }
     })
 
@@ -74,16 +107,26 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7)
 
-            const payload = jwt.verify(token, SECRET)
+            const payload = jwt.verify(token, process.env.JWT_SECRET)
 
             const { sub: userId } = payload
 
 
             logic.getPosts(userId)
                 .then(posts => res.json(posts))
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -91,7 +134,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7)
 
-            const payload = jwt.verify(token, SECRET)
+            const payload = jwt.verify(token, process.env.JWT_SECRET)
 
             const { sub: userId } = payload
 
@@ -99,9 +142,19 @@ const startApi = () => {
 
             logic.createPost(userId, image, text)
                 .then(() => res.status(201).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
     })
 
@@ -109,7 +162,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7)
 
-            const payload = jwt.verify(token, SECRET)
+            const payload = jwt.verify(token, process.env.JWT_SECRET)
 
             const { sub: userId } = payload
 
@@ -118,20 +171,31 @@ const startApi = () => {
 
             logic.deletePost(userId, postId)
                 .then(() => res.status(204).send())
-                .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
-
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
         } catch (error) {
-            res.status(400).json({ error: error.constructor.name, message: error.message })
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
         }
 
     })
 
 
-    api.listen(PORT, () => console.log(`API running on port ${PORT}`))
+    api.listen(process.env.PORT, () => console.log(`API running on port ${process.env.PORT}`))
 
 
 }
 connectToDb()
-    .then(() => startApi())
+    .then(() =>
+        startApi()
+    )
     .catch(error => console.error(error))
 
