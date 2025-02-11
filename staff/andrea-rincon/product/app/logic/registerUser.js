@@ -1,4 +1,4 @@
-import validate from './helper/validate'
+import { validate, errors } from 'com'
 
 const registerUser = (name, email, username, password) => {
     validate.name(name)
@@ -23,7 +23,9 @@ const registerUser = (name, email, username, password) => {
                 .then(body => {
                     const { error, message } = body
 
-                    throw new Error(message)
+                    const constructor = errors[error]
+
+                    throw new constructor(message)
                 })
 
         })

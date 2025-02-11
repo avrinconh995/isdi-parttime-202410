@@ -1,3 +1,5 @@
+import { errors } from 'com'
+
 const getUserName = () => {
     return fetch(`${import.meta.env.VITE_API_URL}/users`, {
         method: 'GET',
@@ -17,7 +19,9 @@ const getUserName = () => {
                 .then(body => {
                     const { error, message } = body
 
-                    throw new Error(message)
+                    const constructor = errors[error]
+
+                    throw new constructor(message)
                 })
         })
 }

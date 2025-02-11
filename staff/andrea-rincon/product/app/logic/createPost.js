@@ -1,4 +1,4 @@
-import validate from './helper/validate'
+import { validate, errors } from 'com'
 
 const createPost = (image, text) => {
     validate.image(image)
@@ -21,6 +21,8 @@ const createPost = (image, text) => {
             return res.json()
                 .then(body => {
                     const { error, message } = body
+
+                    const constructor = errors[error]
 
                     throw new Error(message)
                 })

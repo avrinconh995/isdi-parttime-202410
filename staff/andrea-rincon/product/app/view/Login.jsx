@@ -1,6 +1,9 @@
 import './Login.css'
 
 import logic from '../logic'
+import { errors } from 'com'
+
+const { CredentialsError, SystemError } = errors
 
 function Login(props) {
     console.log('Login -> render')
@@ -28,9 +31,10 @@ function Login(props) {
 
 
         } catch (error) {
-            alert(error.message)
-
-            console.error(error)
+            if (error instanceof CredentialsError)
+                alert(error.message)
+            else if (error instanceof SystemError)
+                alert('Sorry, try againg later.')
         }
     }
     const handleRegisterLinkClick = event => {

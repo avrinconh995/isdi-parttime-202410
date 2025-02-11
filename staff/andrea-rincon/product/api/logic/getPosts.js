@@ -1,6 +1,5 @@
 import { User, Post } from '../data/models.js'
-import validate from './helper/validate.js'
-import errors from '../errors/index.js'
+import { validate, errors } from 'com'
 
 const { SystemError, NotFoundError } = errors
 

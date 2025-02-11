@@ -1,6 +1,9 @@
 import './Register.css'
 
 import logic from '../logic'
+import { errors } from 'com'
+
+const { DuplicityError, SystemError } = errors
 
 function Register(props) {
     console.log('Register -> render')
@@ -23,7 +26,11 @@ function Register(props) {
                     props.onUserRegistered()
                 })
                 .catch(error => {
-                    alert(error.message)
+                    //alert(error.message)
+                    if (error instanceof DuplicityError)
+                        alert(error.message)
+                    else if (error instanceof SystemError)
+                        alert('Sorry, try againg later')
 
                     console.error(error)
                 })

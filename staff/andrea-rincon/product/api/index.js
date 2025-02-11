@@ -1,11 +1,13 @@
 import 'dotenv/config'
+
 import mongoose from 'mongoose'
+
 import express from 'express'
 import cors from 'cors'
 import jwt from 'jsonwebtoken'
 
 import logic from './logic/index.js'
-import errors from './errors/index.js'
+import { errors } from 'com'
 
 
 const { ValidateError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors

@@ -1,4 +1,4 @@
-import validate from './helper/validate'
+import { validate, errors } from 'com'
 
 const deletePost = postId => {
     validate.id(postId, 'postId')
@@ -22,7 +22,9 @@ const deletePost = postId => {
                 .then(body => {
                     const { error, message } = body
 
-                    throw new Error(message)
+                    const constructor = errors[error]
+
+                    throw new constructor(message)
                 })
         })
 
