@@ -1,15 +1,13 @@
-import './Post.css'
-
 import logic from '../../logic'
 
 import formatDate from '../helper/formatDate'
 
-function Post(props) {
+function Post({ post, onPostDeleted, onPostLikeToggled }) {
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
             try {
-                logic.deletePost(props.post.id)
-                    .then(() => props.onPostDeleted())
+                logic.deletePost(post.id)
+                    .then(() => onPostDeleted())
                     .catch(error => {
                         alert(error.message)
 
@@ -24,15 +22,15 @@ function Post(props) {
 
     console.log('Post -> render')
 
-    return <article className="Post">
-        <h3 className="Post-author">{props.post.author.username}</h3>
-        <img className="Post-image" src={props.post.image} />
-        <p className="Post-text">{props.post.text}</p>
+    return <article className="border border-black p-1 bg-white">
+        <h3 >{post.author.username}</h3>
+        <img className="w-full" src={post.image} />
+        <p className="m-0">{post.text}</p>
 
-        <div className="Post-bottom">
-            <time className="Post-date">{formatDate(props.post.date)}</time>
+        <div className="button">
+            <time className="text-[14px] text-[rgb(30,58,138)">{formatDate(post.date)}</time>
 
-            {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
+            {post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
         </div>
     </article>
 }

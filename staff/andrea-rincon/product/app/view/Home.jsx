@@ -1,4 +1,3 @@
-import './Home.css'
 
 import { useState, useEffect } from 'react'
 
@@ -10,7 +9,7 @@ import CreatePost from './components/CreatePost'
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 
 
-function Home(props) {
+function Home({ onUserLoggedOut }) {
     //this.state = { name: null, view: 'posts' }
     const navigate = useNavigate()
 
@@ -52,7 +51,7 @@ function Home(props) {
         try {
             logic.logoutUser()
 
-            props.onUserLoggedOut()
+            onUserLoggedOut()
         } catch (error) {
             alert(error.message)
 
@@ -70,22 +69,24 @@ function Home(props) {
 
     console.log('Home -> render')
 
-    return <div className="Home">
-        <header className="Home-header">
-            <h2 className="Home-title" onClick={handleHomeClick}></h2>
+    return <div className="mx-2">
+        <header className="flex items-start justify-between text-[20px] relative top-2 left-2">
+            <h2 className="m-0" onClick={handleHomeClick}></h2>
 
-            <h1 className="Home-name"> {name}</h1>
+            <h1 className="text-[20px] "> {name}</h1>
 
-            <button className="Logout-Button" type="button" onClick={handleLogoutButtonClick}>Logout</button>
+
+            <button className="button" type="button" onClick={handleLogoutButtonClick}>Logout</button>
+
         </header>
-        <div className="Home-content">
+        <div className="mb-9">
             <Routes>
                 <Route path="/" element={<Posts />} />
                 <Route path="/create-post" element={<CreatePost onPostCreated={handlePostCreated} onCancel={handleCancelCreatePost} />} />
             </Routes>
         </div>
 
-        <footer className="Home-footer">
+        <footer className="flex items-center justify-center h-6 fixed bottom-0 w-full ">
             {view !== 'create-post' && <button type="button" onClick={handleCreatePostButtonClick}>+</button>}
         </footer>
     </div>

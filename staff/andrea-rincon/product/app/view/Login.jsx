@@ -1,11 +1,9 @@
-import './Login.css'
-
 import logic from '../logic'
 import { errors } from 'com'
 
 const { CredentialsError, SystemError } = errors
 
-function Login(props) {
+function Login({ onUserLoggedIn, onRegisterClicked }) {
     console.log('Login -> render')
 
     const handleFormSubmit = event => {
@@ -21,7 +19,7 @@ function Login(props) {
                 .then(() => {
                     form.reset()
 
-                    props.onUserLoggedIn()
+                    onUserLoggedIn()
                 })
                 .catch(error => {
                     alert(error.message)
@@ -40,23 +38,25 @@ function Login(props) {
     const handleRegisterLinkClick = event => {
         event.preventDefault()
 
-        props.onRegisterClicked()
+        onRegisterClicked()
     }
 
     return <main>
-        <h2 className="Login-title">Login</h2>
+        <h2 className="text-bluelight font-solid 20">Login</h2>
 
-        <form onSubmit={handleFormSubmit} >
+        <form className="form" onSubmit={handleFormSubmit} >
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input className="input" type="text" id="username" />
 
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input className="input" type="password" id="password" />
 
-            <button type="submit">Login</button>
+            <div className="button px-6 py-2 rounded-md text-[20px] flex justify-end ">
+                <button type="submit">Login</button>
+            </div>
         </form>
 
-        <a href="" onClick={handleRegisterLinkClick}>Register</a>
+        <a href="" className="text-white bold underline" onClick={handleRegisterLinkClick}>Register</a>
     </main>
 }
 

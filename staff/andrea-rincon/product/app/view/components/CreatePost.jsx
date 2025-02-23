@@ -1,6 +1,6 @@
 import logic from '../../logic'
 
-function CreatePost(props) {
+function CreatePost({ onPostCreated, onCancel }) {
     const handleFormSubmit = event => {
         event.preventDefault()
 
@@ -11,7 +11,7 @@ function CreatePost(props) {
 
         try {
             logic.createPost(image, text)
-                .then(() => props.onPostCreated())
+                .then(() => onPostCreated())
                 .catch(error => {
                     alert(error.message)
                     console.error(error)
@@ -25,23 +25,23 @@ function CreatePost(props) {
         }
     }
 
-    const handleCancelButtonClick = () => props.onCancel()
+    const handleCancelButtonClick = () => onCancel()
 
     console.log('CreatePost -> render')
 
-    return <section className="CreatePost-content">
+    return <section className="">
         <h3 >Create Post</h3>
-        <form onSubmit={handleFormSubmit} className="Create-form" >
+        <form onSubmit={handleFormSubmit} >
 
             <label for="image">Image</label>
-            <input type="url" id="image" />
+            <input className="input w-full" type="url" id="image" />
 
             <label for="text">Text</label>
-            <input type="text" id="text" />
+            <input className="input w-full" type="text" id="text" />
 
-            <button className="CreatePost-button" type="submit">Create</button>
+            <button className="button" type="submit">Create</button>
         </form>
-        <button className="Cancel-button" onClick={handleCancelButtonClick}>Cancel</button>
+        <button className="button w-full mt-5" onClick={handleCancelButtonClick}>Cancel</button>
     </section>
 }
 

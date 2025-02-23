@@ -1,5 +1,3 @@
-import './Posts.css'
-
 import { useState, useEffect } from 'react'
 
 import logic from '../../logic'
@@ -38,7 +36,7 @@ function Posts() {
 
     console.log('Posts -> render')
 
-    return <section className="Posts">
+    return <section className="flex flex-col gap-2">
         {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />
         )}
     </section>

@@ -1,11 +1,10 @@
-import './Register.css'
 
 import logic from '../logic'
 import { errors } from 'com'
 
 const { DuplicityError, SystemError } = errors
 
-function Register(props) {
+function Register({ onUserRegistered, onLoginClicked }) {
     console.log('Register -> render')
 
     const handleFormSubmit = event => {
@@ -23,7 +22,7 @@ function Register(props) {
                 .then(() => {
                     form.reset()
 
-                    props.onUserRegistered()
+                    onUserRegistered()
                 })
                 .catch(error => {
                     //alert(error.message)
@@ -44,33 +43,33 @@ function Register(props) {
     const handleLoginLinkClick = event => {
         event.preventDefault()
 
-        props.onLoginClicked()
+        onLoginClicked()
     }
 
-    return <main className="Register-Content">
-        <h2 className="Register-title">Register</h2>
+    return <main className="main ">
+        <h2 className="text-bluelight font-solid 20">Register</h2>
 
-        <form onSubmit={handleFormSubmit} className="Register-form" >
+        <form className="form" onSubmit={handleFormSubmit}>
 
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" />
+            <input className="input" type="text" id="name" />
 
             <label htmlFor="email">E-mail</label>
-            <input type="email" id="email" />
+            <input className="input" type="email" id="email" />
 
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input className="input" type="text" id="username" />
 
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input className="input" type="password" id="password" />
 
-            <div className="Register-button-container">
+            <div className="button px-6 py-2 rounded-md text-[20px] flex justify-end ">
                 <button type="submit">Register</button>
             </div>
         </form>
 
-        <a href="" className="Register-LoginLink" onClick={handleLoginLinkClick}>Login</a>
-    </main>
+        <a href="" className="text-white bold underline" onClick={handleLoginLinkClick}>Login</a>
+    </main >
 }
 
 export default Register

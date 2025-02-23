@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+@import "tailwindcss";
+
+
+@theme {
+    --font-audiowide: Audiowide;
+    --color-bluey: bluey;
+}
+
+@layer components {
+    .main {
+        @apply my-0 mx-2;
+    }
+
+    .form {
+        @apply flex flex-col gap-4 border-8;
+    }
+
+    .input {
+        @apply border-1 border-white
+    }
+}
+
+body {
+    padding: 0;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-botton: 10px;
+}
+
+input,
+button {
+    border-width: 2px;
+    border-style: solid;
+    border-color: #483D8B;
+}
+
+input,
+button,
+label,
+a {
+    font-size: 20px;
+
+}
+
+button {
+    background-color: rgb(26, 43, 87);
+    color: rgb(160, 216, 255);
+}
