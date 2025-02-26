@@ -4,19 +4,32 @@
 
 Calendario - Agenda familiar que me permita crear diferentes eventos y poder llevar una organizacion con las ni;as peque;as texto en desarrollo....
 
-![Poner imagen aqui titulo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNjJc4JeBMqUU7rs1kOD4lgBEguh59Ny-VEQ&s)
+![Poner imagen aqui titulo](https://cloudfront-us-east-1.images.arcpublishing.com/infobae/6LKSK3L3SZE4TMHDU4I37QZIBE.jpg)
 
 ## Functional
 
 ### Use Cases
-Users:
--add events
--edit events
--delete events
--search events
--edit profil (phone, email, kids...)
+
+User
+- add event
+- edit event
+- delete event
+- view event
+- view calendar and events (with filter)
+- edit profile (phone, email, kids...)
 
 ### UXUI Design
+
+#### Views
+
+- Landing
+- Login
+- Register
+- Home
+    - Calendar
+        - Event List
+    - Create Event
+    - View Event
 
 [Figma]()
 
@@ -44,10 +57,23 @@ Users:
 ### Data Model
 
 User
-- name(string)
+- id (uuid)
+- name (string)
 - email (string)
 - password (string)
 
+Child
+- id (uuid)
+- parent (User.id)
+- name (string)
+
+Event
+- id (uuid)
+- author (User.id)
+- children ([Child.id])
+- title (string)
+- description (string)
+- date (Date)
 
 ### Coverage
 ![Code Coverage]()
