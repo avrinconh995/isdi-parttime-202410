@@ -1,15 +1,19 @@
 {
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "com": "file:../com",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "mongoose": "^8.10.2"
   },
   "name": "api",
   "version": "1.0.0",
-  "description": "How to start app server:",
+  "description": "",
   "main": "index.js",
   "type": "module",
-  "devDependencies": {},
   "scripts": {
+    "start": "node index.js",
+    "inspect": "node --inspect-brk index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
