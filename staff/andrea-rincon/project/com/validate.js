@@ -4,6 +4,8 @@ import errors from './errors/index.js'
 
 const { ValidationError } = errors
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const PASSWORD_REGEX = /^((?!.*[\s])(?=.*[a-zA-Z0-9])(?=.*\d).{8,15})/
+
 
 
 
@@ -22,7 +24,7 @@ const validate = {
 
     password(password) {
         if (typeof password !== 'string') throw new ValidationError('invalid name type')
-        if (password.length < 1) throw new ValidationError('invalid name length')
+        if (!PASSWORD_REGEX.test(password)) throw new ValidationError('invalid password syntax')
     },
     id(id, explain = 'id') {
         if (typeof id !== 'string') throw new ValidationError(`invalid${explain} type`)
