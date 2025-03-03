@@ -6,6 +6,7 @@ import formatDate from '../helper/formatDate'
 
 function Post({ post, onPostDeleted, onPostLikeToggled }) {
     const [edit, setEdit] = useState(false)
+    const [text, setText] = useState(post.text)
 
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
@@ -67,13 +68,13 @@ function Post({ post, onPostDeleted, onPostLikeToggled }) {
 
         {post.own && <>
             {edit ?
-                <div>
-                    <button type="button" onClick={handleSaveEditButtonClick} class="border-none outline-none text-white bg-gray-600 rounded-md px-2 py-1">save</button>
+                <div class="flex  justify-between">
+                    <button type="button" onClick={handleSaveEditButtonClick} class="border-none outline-none text-white bg-gray-600 rounded-md px-2 py-1">💾</button>
 
-                    <button type="button" onClick={handleCancelButtonClick}>cancel</button>
+                    <button type="button" onClick={handleCancelButtonClick}>❌</button>
                 </div>
                 :
-                <button type="button" onClick={handleEditButtonClick}>📝</button>
+                <button class="flex items-center justify-between" type="button" onClick={handleEditButtonClick}>📝</button>
 
             }
         </>}
