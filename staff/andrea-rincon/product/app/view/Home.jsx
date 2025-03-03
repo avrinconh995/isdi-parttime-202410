@@ -6,7 +6,7 @@ import logic from '../logic'
 import Posts from './components/Posts'
 import CreatePost from './components/CreatePost'
 
-import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 
 function Home({ onUserLoggedOut }) {

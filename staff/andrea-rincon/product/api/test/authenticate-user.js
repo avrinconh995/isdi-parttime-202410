@@ -3,7 +3,7 @@ fetch('http://localhost:8080/users/auth ', {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: '{"username":"bluey","password":"123123123"}'
+    body: '{"username":"bingo","password":"123123123"}'
 })
 
     .then(res => {

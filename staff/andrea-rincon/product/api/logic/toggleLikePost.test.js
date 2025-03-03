@@ -1,17 +1,14 @@
 import mongoose from 'mongoose'
-import getPosts from './getPosts.js'
+import toggleLikePost from './toggleLikePost.js'
 
 mongoose.connect('mongodb://localhost:27017/product')
     .then(() => {
         try {
-            getPosts('67c44cd23f6d9a88316a6893')
-                .then(posts => console.log('posts gotten', posts))
+            toggleLikePost('67c448ca832e2e9afdac3ce3', '67c47384c2d9dfa3dd780709')
+                .then(result => console.log('post like toggled', result))
                 .catch(error => console.error(error))
-
         } catch (error) {
             console.error(error)
         }
     })
     .catch(error => console.error(error))
-
-

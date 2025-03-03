@@ -19,7 +19,6 @@ const createPost = (userId, image, text) => {
                 .catch(error => { throw new SystemError(error.message) })
         })
         .then(post => { })
-
 }
 
 export default createPost

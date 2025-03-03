@@ -16,18 +16,18 @@ mongoose.connect('mongodb://localhost:27017/test')
 
     .then(() => Promise.all([User.deleteMany(), Post.deleteMany()]))
     .then(() => {
-        const pepito = new User({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
-        const post = new Post({ author: pepito._id, image: 'https://imgs.search.brave.com/hI_be7hWUNAu_Rl8bbGsYFiGq9TaVhQ6mMivvJGflhM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDgw/OTE1Mjc0L3Bob3Rv/L2ZyZXNoLW1lbG9u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz12ZWRtdWtSZUZE/dkNPekZ3aUNGaGli/TnlGRWhJMHhQR2lB/OExsalhLVkdVPQ', text: 'hey pepito' })
+        const bluey = new User({ name: 'Bluey', email: 'bluey@bluey.com', username: 'bluey', password: '123123123' })
+        const post = new Post({ author: bluey._id, image: 'https://www.criarconsentidocomun.com/wp-content/uploads/2024/09/Expertos-en-desarrollo-recomiendan-la-serie-Bluey-1.jpg', text: 'hey Bluey' })
 
-        return Promise.all([pepito.save(), post.save()])
+        return Promise.all([bluey.save(), post.save()])
     })
-    .then(([pepito, post]) => {
+    .then(([bluey, post]) => {
         // const pepito = results[0]
         // const post = results[1]
 
         // const = results
 
-        console.log('user saved', pepito._id)
+        console.log('user saved', bluey._id)
         console.log('post saved', post._id)
     })
     .catch(error => console.error(error))

@@ -34,10 +34,16 @@ function Posts() {
 
     const handlePostDeleted = () => loadPosts()
 
+    const handlePostLikeToggle = () => loadPosts()
+
     console.log('Posts -> render')
 
     return <section className="flex flex-col gap-2">
-        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />
+        {posts.map(post => <Post
+            key={post.id}
+            post={post}
+            onPostDeleted={handlePostDeleted}
+            onPostLikeToggled={handlePostLikeToggle} />
         )}
     </section>
 }

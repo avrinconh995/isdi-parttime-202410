@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import authenticateUser from './authenticateUser.js'
 
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect('mongodb://localhost:27017/product')
     .then(() => {
         try {
             authenticateUser('bluey', '123123123')
