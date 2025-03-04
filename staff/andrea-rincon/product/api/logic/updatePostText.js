@@ -3,9 +3,10 @@ import { validate, errors } from 'com'
 
 const { SystemError, NotFoundError } = errors
 
-const toggleLikePost = (userId, postId) => {
+const updatePostText = (userId, postId, text) => {
     validate.id(userId, 'userId')
     validate.id(postId, 'postId')
+    validate.text(text, 'text')
 
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
@@ -13,24 +14,18 @@ const toggleLikePost = (userId, postId) => {
             if (!user) throw new NotFoundError('user not found')
 
             return Post.findById(postId)
+                .catch(error => { throw new SystemError(error.message) })
         })
         .then(post => {
             if (!post) throw new NotFoundError('post not found')
 
-            const { likes } = post
-
-            const index = likes.findIndex(userObjectId => userObjectId.toString() === userId)
-
-            if (index < 0)
-                likes.push(userId)
-
-            else
-                likes.splice(index, 1)
+            post.text = text
 
             return post.save()
                 .catch(error => { throw new SystemError(error.message) })
+
         })
         .then(result => { })
 }
 
-export default toggleLikePost
+export default updatePostText

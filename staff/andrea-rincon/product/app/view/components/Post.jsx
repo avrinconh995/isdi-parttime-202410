@@ -44,7 +44,10 @@ function Post({ post, onPostDeleted, onPostLikeToggled }) {
 
     const handleEditButtonClick = () => setEdit(true)
 
-    const handleCancelButtonClick = () => setEdit(false)
+    const handleCancelButtonClick = () => {
+        setEdit(false)
+        setText(post.text)
+    }
 
     const handlePostTextChange = event => setText(event.target.value)
 
@@ -61,7 +64,7 @@ function Post({ post, onPostDeleted, onPostLikeToggled }) {
         <img class=" w-full" src={post.image} />
 
         {edit ?
-            <input class="m-0 mb-[1px] bg-blue-500" onChange={handlePostTextChange} defaultValue={post.text} />
+            <input class="m-0 mb-[1px] bg-blue-500" onChange={handlePostTextChange} defaultValue={text} />
             :
             <p class="m-0 mb-[1px]">{post.text}</p>
         }
