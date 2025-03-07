@@ -1,5 +1,3 @@
-
-import { type } from 'os'
 import errors from './errors/index.js'
 
 const { ValidationError } = errors
