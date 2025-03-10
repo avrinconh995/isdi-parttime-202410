@@ -1,7 +1,7 @@
 function Landing({ onLoginClicked, onRegisterClicked }) {
     console.log('Landing -> render')
 
-    const handleLoginLinkClick = (event) => {
+    const handleLoginClick = (event) => {
         event.preventDefault()
         onLoginClicked()
     };
@@ -19,19 +19,15 @@ function Landing({ onLoginClicked, onRegisterClicked }) {
 
                 <div className="flex justify-center w-full mt-10">
                     <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8">
-                        <a href="" onClick={handleLoginLinkClick}>Inicia Sesión</a>
+                        <a href="" onClick={handleLoginClick}>Inicia Sesión</a>
                     </button>
                 </div>
 
                 <div className="flex justify-start w-full p-3">
                     <p className="text-roboto text-base text-black">
                         ¿No tienes una cuenta?,
-                        <button
-                            className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1"
-                            onClick={handleRegisterLinkClick}
-                        >
-                            Regístrate
-                        </button>
+                        <button className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1" onClick={handleRegisterLinkClick}
+                        >Regístrate</button>
                     </p>
                 </div>
             </div>

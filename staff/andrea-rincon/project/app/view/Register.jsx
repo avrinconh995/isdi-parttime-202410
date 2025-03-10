@@ -49,7 +49,7 @@ function Register({ onUserRegistered, onLoginClicked }) {
             <h2 className="font-montserrat text-3xl font-bold text-black mb-8 text-center">Crea tu perfil</h2>
         </div>
 
-        <form className="form w-full" onSubmit={handleFormSubmit}>
+        <form className="form" onSubmit={handleFormSubmit}>
             <label className="label" htmlFor="name">Nombre</label>
             <input className="input" type="text" id="name" />
 
@@ -58,10 +58,12 @@ function Register({ onUserRegistered, onLoginClicked }) {
 
             <label className="label" htmlFor="password">Contraseña</label>
             <input className="input" type="password" id="password" />
+
+            <div className="flex justify-center w-full p-3">
+                <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8" type="submit">Regístrate</button>
+            </div>
+
         </form>
-
-        <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8" type="submit">Regístrate</button>
-
 
         <div className="flex justify-start w-full p-3">
             <a href="" onClick={handleLoginLinkClick} className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1 ">Inicia Sesión</a>

@@ -14,7 +14,7 @@
 
 @layer components {
     .input {
-        @apply rounded-md border border-gray-300 p-2 font-inter mb-4 bg-white px-4 mx-auto w-11/12;
+        @apply rounded-md border border-gray-300 p-1 font-inter mb-2 px-14 bg-white w-full;
 
     }
 
