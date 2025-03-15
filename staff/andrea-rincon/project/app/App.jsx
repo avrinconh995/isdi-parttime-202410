@@ -18,14 +18,18 @@ function App() {
     if (viewInPath !== 'landing' && viewInPath !== 'register' && viewInPath !== 'login')
         viewInPath = 'landing'
 
-    const [view, setView] = useState('landing')
+    const [view, setView] = useState('home')
 
-
-    const handleLoginClick = () => setView('login')
 
     const handleRegisterClick = () => setView('register')
 
+    const handleLoginClick = () => setView('login')
+
+    const handleUserLoggedIn = () => setView('home')
+
     const handleUserRegistered = () => setView('login')
+
+    const handleUserLoggedOut = () => setView('login')
 
     useEffect(() => {
         switch (view) {
@@ -59,11 +63,11 @@ function App() {
             } />
 
             <Route path="/login" element={
-                <Login />
+                <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
             } />
 
-            <Route path="/home" element={
-                <Home />
+            <Route path="/*" element={
+                <Home onUserLoggedOut={handleUserLoggedOut} />
             } />
         </Routes>
 

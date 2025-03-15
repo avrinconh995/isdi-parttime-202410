@@ -59,14 +59,16 @@ function Register({ onUserRegistered, onLoginClicked }) {
             <label className="label" htmlFor="password">Contraseña</label>
             <input className="input" type="password" id="password" />
 
-            <div className="flex justify-center w-full p-3">
-                <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8" type="submit">Regístrate</button>
-            </div>
+
+            {/* <div className="flex justify-center w-full p-3"> */}
+            <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8" type="submit ">Regístrate</button>
+            {/* </div> */}
+
 
         </form>
 
         <div className="flex justify-start w-full p-3">
-            <a href="" onClick={handleLoginLinkClick} className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1 ">Inicia Sesión</a>
+            <a className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1 " href="" onClick={handleLoginLinkClick} >Inicia Sesión</a>
         </div>
 
 

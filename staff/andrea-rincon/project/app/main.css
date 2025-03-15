@@ -14,7 +14,7 @@
 
 @layer components {
     .input {
-        @apply rounded-md border border-gray-300 p-1 font-inter mb-2 px-14 bg-white w-full;
+        @apply font-roboto rounded-md border border-gray-300 p-1 mb-2 px-14 bg-white w-full justify-center text-center;
 
     }
 
@@ -27,7 +27,7 @@
     }
 
     .form {
-        @apply flex flex-col gap-1 justify-center;
+        @apply flex flex-col gap-1 justify-center items-center;
     }
 
     .label {
