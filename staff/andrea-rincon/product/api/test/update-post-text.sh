@@ -1,0 +1,1 @@
+curl -X PATCH -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2M0NDhjYTgzMmUyZTlhZmRhYzNjZTMiLCJpYXQiOjE3NDIyMzE1NTB9.8-XrTnFiUtVzBcxRgQ-vtQnxGcf3egmSuMzzTTRfsLY' -H 'Content-Type: application/json' -d '{"text":"blueyprueba1"}' http://localhost:8080/posts/67c47384c2d9dfa3dd780709/text -v

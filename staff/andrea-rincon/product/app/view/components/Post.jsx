@@ -4,7 +4,7 @@ import logic from '../../logic'
 
 import formatDate from '../helper/formatDate'
 
-function Post({ post, onPostDeleted, onPostLikeToggled }) {
+function Post({ post, onPostDeleted, onPostLikeToggled, onPostTextEdited }) {
     const [edit, setEdit] = useState(false)
     const [text, setText] = useState(post.text)
 
@@ -53,40 +53,54 @@ function Post({ post, onPostDeleted, onPostLikeToggled }) {
 
     const handleSaveEditButtonClick = () => {
         setEdit(false)
-        console.log('TODO call api to update post tex, text')
+
+        try {
+            logic.updatePostText(post.id, text)
+                .then(() => onPostTextEdited())
+                .catch(error => {
+                    alert(error.message)
+
+                    console.error(error)
+                })
+        } catch (error) {
+            alert(error.message)
+
+            console.error(error)
+        }
     }
+
 
     console.log('Post -> render')
 
-    return <article class="border border-black rounded-xl p-4">
-        <h3 class="m-0">{post.author.username}</h3>
+    return <article className="border border-black rounded-xl p-4">
+        <h3 className="m-0">{post.author.username}</h3>
 
-        <img class=" w-full" src={post.image} />
+        <img className=" w-full" src={post.image} />
 
         {edit ?
-            <input class="m-0 mb-[1px] bg-blue-500" onChange={handlePostTextChange} defaultValue={text} />
+            <input className="m-0 mb-[1px] bg-blue-500" onChange={handlePostTextChange} defaultValue={text} />
             :
-            <p class="m-0 mb-[1px]">{post.text}</p>
+            <p className="m-0 mb-[1px]">{post.text}</p>
         }
 
         {post.own && <>
             {edit ?
-                <div class="flex  justify-between">
-                    <button type="button" onClick={handleSaveEditButtonClick} class="border-none outline-none text-white bg-gray-600 rounded-md px-2 py-1">💾</button>
+                <div className="flex  justify-between">
+                    <button type="button" onClick={handleSaveEditButtonClick} className="border-none outline-none text-white bg-gray-600 rounded-md px-2 py-1">💾</button>
 
                     <button type="button" onClick={handleCancelButtonClick}>❌</button>
                 </div>
                 :
-                <button class="flex items-center justify-between" type="button" onClick={handleEditButtonClick}>📝</button>
+                <button className="flex items-center justify-between" type="button" onClick={handleEditButtonClick}>📝</button>
 
             }
         </>}
 
-        <div class="flex items-center justify-between">
-            <time class="text-[14px] text-[rgb(30,58,138)">{formatDate(post.date)}</time>
+        <div className="flex items-center justify-between">
+            <time className="text-[14px] text-[rgb(30,58,138)">{formatDate(post.date)}</time>
 
 
-            <button class="ml-auto bg-none border-none outline-none text-[1.3rem]" type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🤍'} (${post.likes})`}</button>
+            <button className="ml-auto bg-none border-none outline-none text-[1.3rem]" type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🤍'} (${post.likes})`}</button>
 
             {post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
 

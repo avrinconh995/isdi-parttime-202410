@@ -9,6 +9,7 @@ import getPosts from './getPosts'
 import createPost from './createPost'
 import deletePost from './deletePost'
 import toggleLikePost from './toggleLikePost'
+import updatePostText from './updatePostText'
 
 
 
@@ -24,6 +25,7 @@ const logic = {
     getPosts,
     createPost,
     deletePost,
+    updatePostText,
     toggleLikePost
 }
 
