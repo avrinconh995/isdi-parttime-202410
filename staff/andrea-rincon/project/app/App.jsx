@@ -18,7 +18,7 @@ function App() {
     if (viewInPath !== 'landing' && viewInPath !== 'register' && viewInPath !== 'login')
         viewInPath = 'landing'
 
-    const [view, setView] = useState('home')
+    const [view, setView] = useState('landing')
 
 
     const handleRegisterClick = () => setView('register')

@@ -16,7 +16,7 @@ function Login({ onUserLoggedIn, onRegisterClicked }) {
         const password = form.password.value
 
         try {
-            logic.loginUser(username, password)
+            logic.loginUser(email, password)
                 .then(() => {
                     form.reset()
 
@@ -48,7 +48,7 @@ function Login({ onUserLoggedIn, onRegisterClicked }) {
             <h2 className="font-montserrat text-3xl font-bold text-black mb-8 text-center">Inicia Sesión</h2>
         </div>
 
-        <form className="form justify-center p-4" on Submit={handleFormSubmit}>
+        <form className="form justify-center p-4" onSubmit={handleFormSubmit}>
             <label className="label" htmlFor="email">Email</label>
             <input className="input" type="email" id="email" />
 

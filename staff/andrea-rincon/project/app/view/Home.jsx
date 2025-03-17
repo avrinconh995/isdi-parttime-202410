@@ -46,7 +46,7 @@ function Home(onUserLoggedOut) {
 
             <h3 className="font-montserrat text-2xl font-bold text-black mb-8 text-center">Hola, {name}</h3>
 
-            <button className="button" type="button" onClick={handleLogoutButtonClick}>Cerrar Sesión</button>
+            <button className="button " type="button" onClick={handleLogoutButtonClick}>Cerrar Sesión</button>
         </header>
     </div>
 }
