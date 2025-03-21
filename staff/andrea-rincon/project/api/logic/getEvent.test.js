@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
-import getDaysOfMonthsWithEvents from './getDaysOfmonthsWithEvents.js'
+import getEvent from './getEvent.js'
 
 mongoose.connect('mongodb://localhost:27017/calendar')
     .then(() => {
         try {
-            getDaysOfMonthsWithEvents('67dd87387e35562857a0c9c5', 2025, 3)
-                .then(events => console.log('Events found', events))
+            getEvent('67dd87387e35562857a0c9c5', '67dd9d72554317652fa6ba59')
+                .then(result => console.log('event found', result))
                 .catch(error => console.error(error))
         } catch (error) {
             console.error(error)

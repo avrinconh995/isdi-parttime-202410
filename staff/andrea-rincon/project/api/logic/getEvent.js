@@ -13,19 +13,21 @@ const getEvent = (userId, eventId) => {
         .then(user => {
             if (!user) throw new NotFoundError('User not Found')
 
-            return Event.find(eventId).select('-author').populate('children').lean()
+            return Event.findById(eventId).select('-author -__v').populate('children', '-parent -__v').lean()
 
-                .catch(error => { throw new SystemError(error.message) })
-                .then(events => {
-                    events.forEach(event => {
-                        event.id = event._id.toString()
-                        delete event._id
+                .then(event => {
+                    event.id = event._id.toString()
+                    delete event._id
 
-                        delete event.__v
-
+                    event.children.forEach(child => {
+                        child.id = child._id.toString()
+                        delete child._id
                     })
-                    return events
+
+                    return event
+
                 })
+                .catch(error => { throw new SystemError(error.message) })
 
         })
 }

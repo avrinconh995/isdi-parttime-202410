@@ -23,12 +23,19 @@ const getEventsFromDay = (userId, year, month, day) => {
                     $gte: startDate,
                     $lt: endDate
                 }
-            })
-                .catch(error => { throw new SystemError(error.message) })
-                .then(events => events)
+            }).select('-author -__v').populate('children').sort('date').lean()
 
+                .catch(error => { throw new SystemError(error.message) })
+                .then(events => {
+                    events.forEach(event => {
+                        event.id = event._id.toString()
+                        delete event._id
+
+                        event.children = event.children.map(child => child.name)
+                    })
+                    return events
+                })
         })
 }
-
 
 export default getEventsFromDay

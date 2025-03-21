@@ -26,7 +26,7 @@ const validate = {
     },
 
     id(id, explain = 'id') {
-        if (typeof id !== 'string') throw new ValidationError(`invalid${explain} type`)
+        if (typeof id !== 'string') throw new ValidationError(`invalid ${explain} type`)
         if (id.length < 10) throw new ValidationError(`invalid ${explain} length`)
 
     },
