@@ -24,10 +24,36 @@ const validate = {
         if (typeof password !== 'string') throw new ValidationError('invalid name type')
         if (!PASSWORD_REGEX.test(password)) throw new ValidationError('invalid password syntax')
     },
+
     id(id, explain = 'id') {
         if (typeof id !== 'string') throw new ValidationError(`invalid${explain} type`)
         if (id.length < 10) throw new ValidationError(`invalid ${explain} length`)
 
+    },
+
+    number(number, explain = 'number') {
+        if (typeof number !== 'number') throw new ValidationError(`invalid${explain} type`)
+    },
+
+    children(children) {
+        if (!(children instanceof Array)) throw new ValidationError('invalid child type')
+        children.forEach(child => {
+            if (typeof child !== 'string') throw new ValidationError('invalid child type')
+        })
+    },
+
+    date(date) {
+        if (!(date instanceof Date)) throw new ValidationError('invalid date type')
+    },
+
+    title(title) {
+        if (typeof title !== 'string') throw new ValidationError('invalid title type')
+        if (title.length < 1 || title.length > 80) throw new ValidationError('invalid title length')
+    },
+
+    description(description) {
+        if (typeof description !== 'string') throw new ValidationError('invalid description type')
+        if (description.length < 1 || description.length > 80) throw new ValidationError('invalid description length')
     }
 
 }

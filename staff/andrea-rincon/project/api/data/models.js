@@ -38,7 +38,7 @@ const event = new Schema({
     },
     children: [{
         type: ObjectId,
-        ref: 'User',
+        ref: 'Child',
         required: true
     }],
     title: {

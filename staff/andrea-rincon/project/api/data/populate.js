@@ -1,31 +1,38 @@
 import mongoose from 'mongoose'
 import { User, Child, Event } from './models.js'
 
+import bcrypt from 'bcryptjs'
+
 mongoose.connect('mongodb://localhost:27017/calendar')
     .then(() => Promise.all([User.deleteMany(), Child.deleteMany(), Event.deleteMany()]))
     .then(() => {
-        const andrea = new User({ name: 'Andrea Rincon', email: 'avrinconh995@gmail.com', password: '123123123' })
+        return bcrypt.hash('123123123', 10)
+            .then(hash => {
+                const andrea = new User({ name: 'Andrea Rincon', email: 'avrinconh995@gmail.com', password: hash })
 
-        const alana = new Child({ parent: andrea._id, name: 'Alana' })
+                const alana = new Child({ parent: andrea._id, name: 'Alana' })
 
-        const agatha = new Child({ parent: andrea._id, name: 'Agatha' })
+                const agatha = new Child({ parent: andrea._id, name: 'Agatha' })
 
-        const event = new Event({
-            author: andrea._id, children: [alana._id], title: 'Clase natacion',
-            description: 'llevar gorro y lentes a la clase de natacion'
-        })
+                const event = new Event({
+                    author: andrea._id, children: [alana._id], title: 'Clase natacion',
+                    description: 'llevar gorro y lentes a la clase de natacion'
+                })
 
-        const event1 = new Event({
-            author: andrea._id, children: [agatha._id], title: 'cita dra Ana',
-            description: 'consultar próximas vacunas'
-        })
+                const event1 = new Event({
+                    author: andrea._id, children: [agatha._id], title: 'cita dra Ana',
+                    description: 'consultar próximas vacunas'
+                })
 
-        const event2 = new Event({
-            author: andrea._id, children: [alana._id, agatha._id], title: 'Cumple Vicente',
-            description: 'recordar llevar regalo, salir a las 4pm para poder llegar'
-        })
+                const event2 = new Event({
+                    author: andrea._id, children: [alana._id, agatha._id], title: 'Cumple Vicente',
+                    description: 'recordar llevar regalo, salir a las 4pm para poder llegar'
+                })
 
-        return Promise.all([andrea.save(), alana.save(), agatha.save(), event.save(), event1.save(), event2.save()])
+                return Promise.all([andrea.save(), alana.save(), agatha.save(), event.save(), event1.save(), event2.save()])
+
+            })
+
     })
     .then(([andrea, alana, agatha, event, event1, event2]) => {
         console.log('user saved', andrea._id)
@@ -36,3 +43,4 @@ mongoose.connect('mongodb://localhost:27017/calendar')
         console.log('event save', event2._id)
     })
     .catch(error => console.error(error))
+
