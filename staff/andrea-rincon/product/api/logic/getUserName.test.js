@@ -1,7 +1,8 @@
+import 'dotenv/config'
 import mongoose from 'mongoose'
 import getUserName from './getUserName.js'
 
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         try {
             getUserName('6797b9974892c9bce73a6f7f')

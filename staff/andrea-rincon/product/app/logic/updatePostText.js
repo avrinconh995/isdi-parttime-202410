@@ -2,7 +2,7 @@ import { validate, errors } from 'com'
 
 const updatePostText = (postId, text) => {
     validate.id(postId, 'postId')
-    validate.id(text, 'text')
+    validate.text(text, 'text')
 
     return fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}/text`, {
         method: 'PATCH',

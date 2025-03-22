@@ -36,6 +36,8 @@ function Posts() {
 
     const handlePostLikeToggle = () => loadPosts()
 
+    const handlePostTexEdited = () => loadPosts()
+
     console.log('Posts -> render')
 
     return <section className="flex flex-col gap-2">
@@ -43,7 +45,8 @@ function Posts() {
             key={post.id}
             post={post}
             onPostDeleted={handlePostDeleted}
-            onPostLikeToggled={handlePostLikeToggle} />
+            onPostLikeToggled={handlePostLikeToggle}
+            onPostTextEdited={handlePostTexEdited} />
         )}
     </section>
 }

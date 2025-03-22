@@ -70,6 +70,7 @@ function Post({ post, onPostDeleted, onPostLikeToggled, onPostTextEdited }) {
     }
 
 
+
     console.log('Post -> render')
 
     return <article className="border border-black rounded-xl p-4">

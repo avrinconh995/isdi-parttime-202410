@@ -1,7 +1,8 @@
+import 'dotenv/config'
 import mongoose from 'mongoose'
 import getPosts from './getPosts.js'
 
-mongoose.connect('mongodb://localhost:27017/product')
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         try {
             getPosts('67c44cd23f6d9a88316a6893')

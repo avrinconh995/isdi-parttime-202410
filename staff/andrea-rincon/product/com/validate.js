@@ -39,7 +39,7 @@ const validate = {
     },
 
     text(text) {
-        if (typeof text !== 'string') throw ValidationError('invalid text type')
+        if (typeof text !== 'string') throw new ValidationError('invalid text type')
     }
 }
 

@@ -25,7 +25,6 @@ const updatePostText = (userId, postId, text) => {
 
             return post.save()
                 .catch(error => { throw new SystemError(error.message) })
-
         })
         .then(result => { })
 }
