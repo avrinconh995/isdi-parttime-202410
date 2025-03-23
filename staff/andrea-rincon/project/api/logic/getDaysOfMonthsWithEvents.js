@@ -36,10 +36,6 @@ const getDaysOfMonthsWithEvents = (userId, year, month) => {
                     })
                     return filteredDays
                 })
-
-
-
-
         })
 }
 

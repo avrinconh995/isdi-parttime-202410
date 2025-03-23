@@ -18,7 +18,7 @@ const authenticateUser = (email, password) => {
             return bcrypt.compare(password, user.password)
                 .catch(error => { throw new SystemError(error.message) })
                 .then(match => {
-                    if (!match) throw new CredentialsError('wrond credentials')
+                    if (!match) throw new CredentialsError('wrong credentials')
 
                     return user._id.toString()
                 })

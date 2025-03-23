@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost:27017/calendar')
     .then(() => {
         return bcrypt.hash('123123123', 10)
             .then(hash => {
-                const andrea = new User({ name: 'Andrea Rincon', email: 'avrinconh995@gmail.com', password: hash })
+                const andrea = new User({ name: 'Andrea Rincon', email: 'andrea@rincon.com', password: hash })
 
                 const alana = new Child({ parent: andrea._id, name: 'Alana' })
 
