@@ -20,14 +20,17 @@ describe('getEvent', () => {
 
 
     it('succeeds on existing user and events', () => {
-        const andrea = new User({ name: 'Andrea', email: 'andrea@rincon.com', password: '123123123' })
+        const user = new User({ name: 'Andrea', email: 'andrea@rincon.com', password: '123123123' })
 
-
-        return andrea.save()
-            .then(() => {
+        return Promise.all([
+            user.save(),
+            Child.create({ parent: user._id, name: 'Alana' }),
+            Child.create({ parent: user._id, name: 'Agatha' })
+        ])
+            .then(([createdUser, createChild1, createChild2]) => {
                 const event = new Event({
-                    author: andrea._id.toString(),
-                    child: ['Alana'],
+                    author: user._id.toString(),
+                    children: [createChild1._id, createChild2._id],
                     title: 'clases de natacion',
                     date: new Date(2025, 2, 24, 17, 0),
                     description: 'buscar traje de baño'
@@ -36,7 +39,7 @@ describe('getEvent', () => {
                 return event.save()
             })
 
-            .then(event => getEvent(andrea._id.toString(), event._id.toString()))
+            .then(event => getEvent(user._id.toString(), event._id.toString()))
 
 
             .then(event => {
@@ -44,7 +47,7 @@ describe('getEvent', () => {
                 expect(event).to.have.property('title', 'clases de natacion')
                 expect(new Date(event.date).getTime()).to.equal(new Date(2025, 2, 24, 17, 0).getTime())
                 expect(event).to.have.property('description', 'buscar traje de baño')
-                expect(event.children).to.be.an('array').that.is.empty
+                expect(event.children).to.be.an('array').to.have.lengthOf(2)
             })
     })
 

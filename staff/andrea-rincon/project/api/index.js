@@ -5,7 +5,7 @@ import express from 'express'
 import cors from 'cors'
 
 
-import { usersRouter } from './routes/index.js '
+import { usersRouter, eventsRouter } from './routes/index.js '
 import errorHandler from './middlewares/errorHandler.js'
 
 const connectToDb = () => mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'))
@@ -21,6 +21,8 @@ const startApi = () => {
     })
 
     api.use('/users', usersRouter)
+
+    api.use('/events', eventsRouter)
 
     api.use(errorHandler)
 

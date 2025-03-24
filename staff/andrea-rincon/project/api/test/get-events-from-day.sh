@@ -1,0 +1,1 @@
+curl -X GET -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2UxMzc5NDdlY2RlODQ4Zjg1MDIwM2QiLCJpYXQiOjE3NDI4NDAyNDR9.i3VNNv9D-BcyCft0Ol9qSBzkQxsCHbALwI5lyegqZTY' http://localhost:8080/events/2025/3/24 -v

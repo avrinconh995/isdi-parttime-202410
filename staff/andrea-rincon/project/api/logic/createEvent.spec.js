@@ -114,6 +114,25 @@ describe('createEvent', () => {
             })
     })
 
+    it('creates an event with existing children', () => {
+        return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
+            .then(user => Promise.all([
+                Child.create({ name: 'Alana', parent: user._id }),
+                Child.create({ name: 'Agatha', parent: user._id })
+            ]))
+            .then(() => {
+                return User.findOne({ email: 'carolina@carolina.com' })
+                    .then(user => createEvent(user._id.toString(), ['Alana', 'Agatha'], 'Evento mixto', new Date(2025, 7, 24, 15, 0), 'Prueba de niños mixtos'))
+                    .then(() => Event.findOne().populate('children'))
+                    .then(event => {
+                        expect(event).to.exist;
+                        expect(event.children).to.have.lengthOf(2);
+                        const childNames = event.children.map(child => child.name);
+                        expect(childNames).to.include.members(['Alana', 'Agatha']);
+                    })
+            })
+    })
+
     it('creates an event without children', () => {
         return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
             .then(user => createEvent(user._id.toString(), [], 'Reunión de padres', new Date(2025, 3, 24, 18, 0), 'Discusión general'))
@@ -128,3 +147,4 @@ describe('createEvent', () => {
 
     after(() => mongoose.disconnect())
 })
+
