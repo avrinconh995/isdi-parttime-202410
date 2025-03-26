@@ -15,7 +15,7 @@ const getEventsFromDay = (userId, year, month, day) => {
             if (!user) throw new NotFoundError('User not Found')
 
             const startDate = new Date(year, month - 1, day, 0, 0, 0, 0)
-            const endDate = new Date(year, month, - 1, day, 23, 59, 59, 999)
+            const endDate = new Date(year, month - 1, day, 23, 59, 59, 999)
 
             return Event.find({
                 author: userId,

@@ -14,6 +14,7 @@ const getEvent = (userId, eventId) => {
             if (!user) throw new NotFoundError('User not Found')
 
             return Event.findById(eventId).select('-author -__v').populate('children', '-parent -__v').lean()
+                .catch(error => { throw new SystemError(error.message) })
 
                 .then(event => {
                     event.id = event._id.toString()
@@ -25,9 +26,7 @@ const getEvent = (userId, eventId) => {
                     })
 
                     return event
-
                 })
-                .catch(error => { throw new SystemError(error.message) })
 
         })
 }

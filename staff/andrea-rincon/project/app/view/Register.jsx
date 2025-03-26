@@ -44,9 +44,12 @@ function Register({ onUserRegistered, onLoginClicked }) {
         onLoginClicked()
     }
 
-    return <main className="main mt-6">
-        <div className="flex justify-start w-full p-4">
-            <h2 className="font-montserrat text-3xl font-bold text-black mb-8 text-center">Crea tu perfil</h2>
+    return <main className="main mb-2">
+        <header className="bg-mediumblue w-full flex justify-center items-center p-6 mb-4">
+            <h1 className="font-chewy text-4xl font-bold text-white">MylittleCal</h1>
+        </header>
+        <div className="flex justify-center w-full p-6 mt-20">
+            <h2 className="font-happymonkey text-3xl font-bold text-darkblue mb-2 text-center">Crea tu perfil</h2>
         </div>
 
         <form className="form" onSubmit={handleFormSubmit}>
@@ -60,17 +63,13 @@ function Register({ onUserRegistered, onLoginClicked }) {
             <input className="input" type="password" id="password" />
 
 
-            {/* <div className="flex justify-center w-full p-3"> */}
-            <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8" type="submit ">Regístrate</button>
-            {/* </div> */}
+            <div className="flex flex-col items-center w-full">
+                <button className="bg-mediumblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-4 mt-8 " type="submit ">Regístrate</button>
+                <a className=" text-darkblue  text-lg font-montserrat font-extrabold underline cursor-pointer " href="" onClick={handleLoginLinkClick} >Inicia Sesión</a>
+            </div>
 
 
         </form>
-
-        <div className="flex justify-start w-full p-3">
-            <a className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1 " href="" onClick={handleLoginLinkClick} >Inicia Sesión</a>
-        </div>
-
 
     </main>
 }

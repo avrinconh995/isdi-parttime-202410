@@ -13,24 +13,25 @@ function Landing({ onLoginClicked, onRegisterClicked }) {
 
     return (
         <main className="main justify-center" >
-            <div className="flex flex-col items-center w-full max-w-md">
-                <h2 className="font-montserrat text-4xl font-bold text-black mb-8 text-center">¡Bienvenido!</h2>
-                <p className="font-inter text-lg text-black mb- text-center">A mi calendario</p>
 
-                <div className="flex justify-center w-full mt-10">
-                    <button className="bg-darkblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8">
-                        <a href="" onClick={handleLoginClick}>Inicia Sesión</a>
-                    </button>
-                </div>
+            <h1 className="font-chewy text-7xl font-bold text-darkblue mb-15 text-center ">MyLittleCal</h1>
+            <div><p className="font-happymonkey text-lg text-mediumblue font-bold mb- text-center mb-4">¡Bienvenido a mi calendario!</p></div>
 
-                <div className="flex justify-start w-full p-3">
-                    <p className="text-roboto text-base text-black">
-                        ¿No tienes una cuenta?,
-                        <button className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1" onClick={handleRegisterLinkClick}
-                        >Regístrate</button>
-                    </p>
-                </div>
+
+            <div className="flex justify-center w-full mt-10">
+                <button className="bg-mediumblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mb-8">
+                    <a href="" onClick={handleLoginClick}>Inicia Sesión</a>
+                </button>
             </div>
+
+            <div className="flex flex-col items-center w-full p-3 text-center">
+                <p className="text-montserrat text-base text-darkblue">
+                    ¿No tienes una cuenta?,<br></br>
+                    <button className=" text-darkblue  text-lg font-montserrat font-extrabold underline ml-1 items-center" onClick={handleRegisterLinkClick}
+                    >Regístrate</button>
+                </p>
+            </div>
+
         </main>
     )
 }

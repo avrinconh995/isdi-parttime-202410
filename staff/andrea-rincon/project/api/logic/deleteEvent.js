@@ -17,11 +17,6 @@ const deleteEvent = (userId, eventId) => {
         })
         .then(event => {
             if (!event) throw new NotFoundError('Event not Found')
-
         })
-
-
-
 }
-
 export default deleteEvent

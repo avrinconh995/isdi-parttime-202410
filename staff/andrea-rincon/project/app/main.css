@@ -1,21 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap');
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 
 @import "tailwindcss";
 
 @theme {
     --color-darkblue: #033979;
-    --color-mediumblue: 'rgba(61, 186, 234, 0.51)';
-    --color-purple: #B99AC7;
+    --color-mediumblue: #088DC0;
+    --color-bgbottonblue: #3DBAEA;
+    --color-lightblue: #C9E1EB;
+    --color-bluee: #2c3e50;
+    --color-purpu: #B99AC7;
+    --color-purpubold: #7E4299;
     --font-montserrat: Montserrat;
-    --font-inter: Inter;
-    --font-roboto: Roboto;
+    --font-chewy: Chewy;
+    --font-happymonkey: 'Happy Monkey';
+    --font-familjen: 'Familjen Grotesk';
 }
 
 @layer components {
     .input {
-        @apply font-roboto rounded-md border border-gray-300 p-1 mb-2 px-14 bg-white w-full justify-center text-center;
+        @apply font-montserrat rounded-md border border-lightblue p-1 mb-2 px-14 bg-lightblue w-full justify-center text-center;
 
     }
 
@@ -32,6 +44,6 @@
     }
 
     .label {
-        @apply font-roboto block text-black text-xl font-bold text-center
+        @apply font-montserrat font-medium block text-lg text-center text-darkblue;
     }
 }
