@@ -6,9 +6,9 @@ mongoose.connect('mongodb://localhost:27017/calendar')
         try {
             createEvent(
                 '67e2e8645b85bda088a98786', //userId
-                ['Alana', 'Agatha'],//children
+                ['Alana'],//children
                 'Clases de Natacion', // title
-                new Date(2025, 2, 25, 17, 0),//fecha
+                new Date(2025, 2, 27, 17, 0),//fecha
                 'Preguntar por el huevo'//nota            
             )
                 .then(result => console.log('Event created', result))

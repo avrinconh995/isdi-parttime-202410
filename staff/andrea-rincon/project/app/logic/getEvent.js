@@ -1,7 +1,9 @@
-import { errors } from 'com'
+import { validate, errors } from 'com'
 
-const getEventsFromDay = (year, month, day) => {
-    return fetch(`${import.meta.env.VITE_API_URL}/events/${year}/${month}/${day}`, {
+const getEvent = eventId => {
+    validate.id(eventId, 'eventId')
+
+    return fetch(`${import.meta.env.VITE_API_URL}/events/${eventId}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${sessionStorage.token}`
@@ -13,13 +15,7 @@ const getEventsFromDay = (year, month, day) => {
 
             if (status === 200)
                 return res.json()
-                    .then(events => {
-                        events.forEach(event => {
-                            event.date = new Date(event.date)
-
-                        });
-                        return events
-                    })
+                    .then(event => event)
 
             return res.json()
                 .catch(error => { throw new Error(error.message) })
@@ -34,6 +30,4 @@ const getEventsFromDay = (year, month, day) => {
         })
 }
 
-export default getEventsFromDay
-
-
+export default getEvent

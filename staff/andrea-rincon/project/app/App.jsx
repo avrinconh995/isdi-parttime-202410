@@ -17,6 +17,7 @@ function App() {
     const location = useLocation()
 
     let viewInPath = location.pathname.slice(1)
+
     if (viewInPath !== 'landing' && viewInPath !== 'register' && viewInPath !== 'login')
         viewInPath = 'landing'
 

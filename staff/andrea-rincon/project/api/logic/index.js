@@ -15,12 +15,15 @@ const logic = {
     authenticateUser,
     getUserName,
     registerUser,
+
     getEventsFromDay,
     getDaysOfMonthsWithEvents,
-    createEvent,
     getEvent,
-    getChildren,
-    deleteEvent
+
+    createEvent,
+    deleteEvent,
+
+    getChildren
 
 }
 

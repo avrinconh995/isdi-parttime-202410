@@ -5,6 +5,7 @@ import logic from '../logic/'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import Calendar from './components/Calendar'
+import CreateEvent from './components/CreateEvent'
 
 
 function Home({ onUserLoggedOut }) {
@@ -13,33 +14,16 @@ function Home({ onUserLoggedOut }) {
     const navigate = useNavigate()
 
     const [view, setView] = useState('calendar')
-    const [name, setName] = useState(null)
 
-
-    useEffect(() => {
-        console.log('Home-> NAME')
-
-        try {
-            logic.getUserName()
-                .then(name => setName(name))
-                .catch(error => {
-                    alert(error.message)
-
-                    console.error()
-                })
-        } catch (error) {
-            alert(error.message)
-
-            console.error(error)
-        }
-    })
 
     useEffect(() => {
         switch (view) {
             case 'calendar':
-                navigate('/calendar')
+                navigate('/')
                 break
-
+            case 'create-event':
+                navigate('/create-event')
+                break
         }
     }, [view])
 
@@ -55,34 +39,60 @@ function Home({ onUserLoggedOut }) {
         }
     }
 
-    return <main className="main mb2">
+
+    const handleEventCreated = () => setView('calendar')
+
+    const handleCreateEventButtonClick = () => setView('create-event')
+
+    const handleCancelCreateEvent = () => setView('calendar')
+
+    console.log('Home -> render')
+
+    return <section className="main mb2">
         <header className="bg-mediumblue w-full flex justify-center items-end p-6 mb-4">
             <h1 className="font-chewy text-4xl font-bold text-white">MylittleCal</h1>
         </header>
 
+        <main>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Calendar />}
+                />
 
-        <div className="flex flex-col justify-left w-full p-2">
-            <h2 className="font-happymonkey text-3xl font-bold text-darkblue mb-2 mx-2">Hola, {name}</h2>
-            <h2 className="font-familjen text-2xl font-bold text-darkblue mb-2 mx-2 ">Calendario</h2>
-        </div>
+                <Route
+                    path="/create-event"
+                    element={<CreateEvent
+                        onEventCreated={handleEventCreated}
+                        onCancel={handleCancelCreateEvent} />}
+                />
 
+            </Routes>
 
+        </main>
+        {/* 
         <section className="flex justify-center mb-6">
             <Calendar />
-        </section>
+        </section> */}
 
         <div className="flex flex-col items-end w-full mt-0">
-            <button
+            {view === 'calendar' && <button
                 className="bg-mediumblue text-white text-xl font-montserrat font-bold py-3 px-8 rounded-full shadow-md mb-4"
                 type="button"
                 onClick={handleLogoutButtonClick}
             >
                 Salir
-            </button>
+            </button>}
         </div>
 
 
-    </main >
+
+        <footer>
+            {view === 'calendar' && <button className="bg-mediumblue text-white text-xl font-montserrat font-bold py-3 px-8 rounded-full shadow-md mb-4" type="button" onClick={handleCreateEventButtonClick}>+</button>}
+        </footer>
+
+
+    </section >
 }
 
 export default Home

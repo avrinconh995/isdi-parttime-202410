@@ -48,7 +48,7 @@ function Register({ onUserRegistered, onLoginClicked }) {
         <header className="bg-mediumblue w-full flex justify-center items-center p-6 mb-4">
             <h1 className="font-chewy text-4xl font-bold text-white">MylittleCal</h1>
         </header>
-        <div className="flex justify-center w-full p-6 mt-20">
+        <div className="flex justify-center w-full p-6 mt-8">
             <h2 className="font-happymonkey text-3xl font-bold text-darkblue mb-2 text-center">Crea tu perfil</h2>
         </div>
 
