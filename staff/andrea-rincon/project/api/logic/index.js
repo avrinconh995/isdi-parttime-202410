@@ -8,6 +8,7 @@ import getEventsFromDay from './getEventsFromDay.js'
 import getDaysOfMonthsWithEvents from './getDaysOfMonthsWithEvents.js'
 import getChildren from './getChildren.js'
 import deleteEvent from './deleteEvent.js'
+import updateEvent from './updateEvent.js'
 
 
 
@@ -22,6 +23,7 @@ const logic = {
 
     createEvent,
     deleteEvent,
+    updateEvent,
 
     getChildren
 

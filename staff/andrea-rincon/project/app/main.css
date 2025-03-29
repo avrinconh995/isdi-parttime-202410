@@ -28,7 +28,7 @@
 
 @layer components {
     .input {
-        @apply font-montserrat rounded-md border border-lightblue p-1 mb-2 px-14 bg-lightblue w-full justify-center text-center;
+        @apply font-montserrat rounded-md border border-lightblue p-1 mb-2 px-14 bg-lightblue w-full justify-center text-center text-darkblue font-normal;
 
     }
 
@@ -45,6 +45,6 @@
     }
 
     .label {
-        @apply font-montserrat font-medium block text-lg text-center text-darkblue;
+        @apply font-montserrat font-semibold block text-lg text-center text-darkblue;
     }
 }

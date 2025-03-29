@@ -47,6 +47,7 @@ const createEvent = (userId, children, title, date, description) => {
                                         .catch(error => { throw new SystemError(error.message) })
 
                                 })
+
                         } else {
                             const event = new Event({ author: user._id, children: children1, title, date, description })
 

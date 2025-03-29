@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
-
+import { MdDeleteForever } from 'react-icons/md'
+import { FaRegEdit } from "react-icons/fa"
+import { useNavigate } from 'react-router-dom'
 import logic from '../../logic'
 
-
-function EventList({ year, month, day }) {
+function EventList({ year, month, day, onEventDeleted }) {
     console.log('EventList -> render')
 
     const [dayEvents, setDayEvents] = useState([])
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (day === null || day === undefined) return; // Evita ejecutar con un día inválido
         console.log('day events', year, month, day);
@@ -36,21 +39,80 @@ function EventList({ year, month, day }) {
 
     }
 
+    const handleDeleteButtonClick = (eventid) => {
+        if (window.confirm('¿Eliminar este evento?'))
+            try {
+                logic.deleteEvent(eventid)
+                    .then(() => {
+                        onEventDeleted()
+                        loadDayEvents(year, month, day)
+                    })
+
+                    .catch(error => {
+                        alert(error.message)
+
+                        console.error(error)
+                    })
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+
+    }
+
+
+    const handleEditButtonClick = (eventId) => {
+        // Redirige a la ruta de edición con el ID del evento
+        navigate(`/edit-event/${eventId}`)
+    }
+
 
     return <section>
 
-        {/* Monstrar los eventos del dia seleccionado*/}
-        <div className="font-montserrat max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg space-y-[40px]">
+        {/* Mostrar los eventos del día seleccionado */}
+        <div className="font-montserrat max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg">
             {day ? (
                 <>
-                    <h3 className="text-lg font-bold mx-4 text-center capitalize font-montserrat text-darkblue">Eventos  </h3>
+                    <h3 className="text-lg  text-center capitalize text-darkblue mb-4 font-bold">Eventos</h3>
 
                     {dayEvents.length === 0 ? (
-                        <p className="text-lg  mx-4 text-center capitalize font-montserrat text-darkblue">No hay eventos</p>
+                        <p className="text-lg text-center capitalize text-darkblue">No hay eventos</p>
                     ) : (
-                        <ul >
+                        <ul>
                             {dayEvents.map((event, index) => (
-                                <li key={index} className="text-sm font-montserrat text-darkblue"> - {event.title} ({event.children.join(', ')}) - {event.date.toLocaleTimeString().slice(0, 5)}</li>
+                                <li
+                                    key={index}
+                                    className="flex items-center justify-between text-sm text-darkblue p-2 rounded-lg shadow-sm mb-2"
+                                >
+                                    {/* Nombre del evento y Niñas (children) */}
+                                    <div className="flex flex-1 items-center space-x-4 justify-between text-center">
+                                        <span className="font-semibold mr-4 text-center justify-start">{event.title}</span>
+                                        <div className="flex flex-1 items-center justify-between">
+                                            <span className="text-xs text-darkblue mr-2 font-normal">{event.children.join(', ')}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Hora centrada */}
+                                    <span className="text-xs text-darkblue ml-auto mr-4 text-left font-normal justify-between">{event.date.toLocaleTimeString().slice(0, 5)}</span>
+
+                                    {/* Botón de eliminar alineado a la derecha */}
+                                    <button
+                                        className="text-darkblue text-xl ml-4 font-bold"
+                                        type="button"
+                                        onClick={() => handleEditButtonClick(event.id)}
+                                    >
+                                        <FaRegEdit />
+                                    </button>
+                                    <button
+                                        className="text-darkblue text-xl ml-4 font-normal"
+                                        type="button"
+                                        onClick={() => handleDeleteButtonClick(event.id)}
+                                    >
+                                        <MdDeleteForever />
+                                    </button>
+
+                                </li>
                             ))}
                         </ul>
                     )}

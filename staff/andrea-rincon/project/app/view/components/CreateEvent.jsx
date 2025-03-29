@@ -40,31 +40,36 @@ function CreateEvent({ onEventCreated, onCancel }) {
         </div>
 
 
-        <form className="form" onSubmit={handleFormSubmit}>
+        <form className="form " onSubmit={handleFormSubmit}>
             <label className="label" htmlFor="title">Titulo</label>
-            <input className="input" type="text" id="title" />
+            <input className="input mt-2" type="text" id="title" />
 
             <label className="label" htmlFor="children">Hij@(s)</label>
-            <input className="input" type="text" id="children" />
+            <input className="input mt-2" type="text" id="children" />
 
             <label className="label" htmlFor="date">Fecha y Hora  </label>
-            <input className="input" type="datetime-local" id="date" />
-
-
+            <input className="input mt-2" type="datetime-local" id="date" />
 
             <label className="label" htmlFor="description">Nota</label>
-            <input className="input" type="text" id="description" />
+            <input className="input mt-2" type="text" id="description" />
 
 
-            <div className="flex justify-center items-center w-full mt-8">
-                <button
-                    className="bg-redmedium text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mx-2"
-                    onClick={handleCancelButtonClick} type="button"
-                > Cancelar </button>
-                <button
-                    className="bg-mediumblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mr-4 mx-2" // Agregado mr-4 para margen derecho
-                    type="submit"
-                >Guardar</button>
+            <div className="w-full mt-8 flex flex-row justify-between gap-2">
+                <div className="flex justify-between items-center"> {/* Contenedor de botones */}
+                    <button
+                        className="flex-1 bg-redmedium text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mx-2"
+                        onClick={handleCancelButtonClick}
+                        type="button"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        className="flex-1 bg-mediumblue text-white text-xl font-montserrat bold py-3 px-8 rounded-full shadow-md mx-2"
+                        type="submit"
+                    >
+                        Guardar
+                    </button>
+                </div>
             </div>
         </form>
 

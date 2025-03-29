@@ -1,19 +1,27 @@
 import { useState, useEffect } from 'react'
 
-import logic from '../logic/'
-
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 
 import Calendar from './components/Calendar'
 import CreateEvent from './components/CreateEvent'
+import Header from './common/Header'
+
+import { FaPlus } from "react-icons/fa";
+
 
 
 function Home({ onUserLoggedOut }) {
-    console.log('Register -> render')
+    console.log(' home-> render')
 
     const navigate = useNavigate()
+    const location = useLocation()
 
-    const [view, setView] = useState('calendar')
+    let viewInPath = location.pathname.slice(1)
+
+    if (viewInPath !== 'create-event')
+        viewInPath = 'calendar'
+
+    const [view, setView] = useState(viewInPath)
 
 
     useEffect(() => {
@@ -27,32 +35,20 @@ function Home({ onUserLoggedOut }) {
         }
     }, [view])
 
-    const handleLogoutButtonClick = () => {
-        try {
-            logic.logoutUser()
-
-            onUserLoggedOut()
-        } catch (error) {
-            alert(error.message)
-
-            console.error(error)
-        }
-    }
-
-
     const handleEventCreated = () => setView('calendar')
 
     const handleCreateEventButtonClick = () => setView('create-event')
 
     const handleCancelCreateEvent = () => setView('calendar')
 
+    const handleLogoutButtonClick = () => onUserLoggedOut()
+
+
+
     console.log('Home -> render')
 
     return <section className="main mb2">
-        <header className="bg-mediumblue w-full flex justify-center items-end p-6 mb-4">
-            <h1 className="font-chewy text-4xl font-bold text-white">MylittleCal</h1>
-        </header>
-
+        <Header onUserLoggedOut={handleLogoutButtonClick} />
         <main>
             <Routes>
                 <Route
@@ -66,32 +62,21 @@ function Home({ onUserLoggedOut }) {
                         onEventCreated={handleEventCreated}
                         onCancel={handleCancelCreateEvent} />}
                 />
-
             </Routes>
 
         </main>
-        {/* 
-        <section className="flex justify-center mb-6">
-            <Calendar />
-        </section> */}
 
-        <div className="flex flex-col items-end w-full mt-0">
-            {view === 'calendar' && <button
-                className="bg-mediumblue text-white text-xl font-montserrat font-bold py-3 px-8 rounded-full shadow-md mb-4"
-                type="button"
-                onClick={handleLogoutButtonClick}
-            >
-                Salir
-            </button>}
-        </div>
-
-
-
-        <footer>
-            {view === 'calendar' && <button className="bg-mediumblue text-white text-xl font-montserrat font-bold py-3 px-8 rounded-full shadow-md mb-4" type="button" onClick={handleCreateEventButtonClick}>+</button>}
+        <footer className="flex justify-center items-center py-4">
+            {location.pathname === '/' && (
+                <button
+                    type="button"
+                    onClick={handleCreateEventButtonClick}
+                    className="bg-mediumblue rounded-full p-4 shadow-lg"
+                >
+                    <FaPlus className="text-white text-xl" />
+                </button>
+            )}
         </footer>
-
-
     </section >
 }
 

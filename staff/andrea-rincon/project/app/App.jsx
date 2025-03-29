@@ -18,7 +18,7 @@ function App() {
 
     let viewInPath = location.pathname.slice(1)
 
-    if (viewInPath !== 'landing' && viewInPath !== 'register' && viewInPath !== 'login')
+    if (viewInPath !== 'landing' && viewInPath !== 'register' && viewInPath !== 'login' && viewInPath !== 'create-event')
         viewInPath = 'landing'
 
     const [view, setView] = useState(viewInPath)
@@ -32,7 +32,7 @@ function App() {
 
     const handleUserRegistered = () => setView('login')
 
-    const handleUserLoggedOut = () => setView('landing')
+    const handleUserLoggedOut = () => setView('login')
 
     useEffect(() => {
         switch (view) {

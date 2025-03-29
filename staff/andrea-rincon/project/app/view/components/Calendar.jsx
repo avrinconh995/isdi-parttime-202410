@@ -124,8 +124,13 @@ function Calendar() {
         setShowYearSelector(false)
     }
 
+    const handleEventDeleted = () => {
+        loadDaysWithEvents(year, month)
+
+    }
+
     return <section>
-        <div className="flex flex-col justify-left w-full p-2">
+        <div className="flex flex-col justify-left w-full p-2 mt-6">
             <h2 className="font-happymonkey text-3xl font-bold text-darkblue mb-2 mx-2">
                 Hola, {name}
             </h2>
@@ -134,7 +139,7 @@ function Calendar() {
             </h2>
         </div>
 
-        <div className="font-montserrat max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg">
+        <div className="font-montserrat max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg text-darkblue">
             <div className="relative text-center flex items-center justify-center">
                 {/* Mostrar el mes y el año juntos */}
                 <h2 className="text-xl font-bold mx-2 capitalize font-montserrat">
@@ -216,7 +221,7 @@ function Calendar() {
             </div>
         </div>
         <main className="space-y-6 mt-6">
-            <EventList year={year} month={month + 1} day={selectedDay} />
+            <EventList year={year} month={month + 1} day={selectedDay} onEventDeleted={handleEventDeleted} />
 
         </main>
     </section>
