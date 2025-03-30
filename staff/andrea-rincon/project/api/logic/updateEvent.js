@@ -3,49 +3,39 @@ import { validate, errors } from 'com'
 
 const { SystemError, NotFoundError } = errors
 
-const updateEvent = (eventId, userId, children, title, date, description) => {
+const updateEvent = (eventId, userId, title, children, date, description) => {
     // Validaciones de entrada
     validate.id(eventId, 'eventId')
     validate.id(userId, 'userId')
-    validate.children(children)  // Verifica que children sea un arreglo de ObjectIds
     validate.title(title)
+    validate.children(children) // Verifica que sea un array de ObjectIds
     validate.date(date)
     validate.description(description)
 
-    return Event.findById(eventId)
-        .catch(error => { throw new SystemError(error.message) })
 
+
+    return Event.findById(eventId)
         .then(event => {
             if (!event) throw new NotFoundError('Event not found')
 
-            // Actualizamos los campos del evento
-            event.title = title
-            event.date = date
-            event.description = description
+            // Asignar los nuevos valores al evento
+            Object.assign(event, { title, date, description })
 
-            // Comprobamos que cada child de 'children' sea un ObjectId válido
-            // y no esté ya en 'event.children' antes de agregarlo
-            return Child.find({ '_id': { $in: children } })  // Aseguramos que los children existan en la DB
-                .then(childrenFound => {
-                    if (childrenFound.length !== children.length) {
+            // Verificar que los niños existen en la base de datos
+            return Child.find({ '_id': { $in: children } })
+                .then(validChildren => {
+                    if (validChildren.length !== children.length) {
                         throw new SystemError('Some children IDs are invalid or do not exist')
                     }
 
-                    // Agregar los children a la lista si no están ya incluidos
-                    children.forEach(child => {
-                        if (!event.children.includes(child)) {
-                            event.children.push(child)
-                        }
-                    })
+                    // Actualizar la lista de niños en el evento, eliminando duplicados
+                    event.children = [...new Set(validChildren.map(child => child._id.toString()))]
 
-                    // Guardar el evento actualizado
                     return event.save()
-                        .catch(error => { throw new SystemError(error.message) })
                 })
         })
-        .then(event => {
-            return event  // Retorna el evento actualizado
-        })
+        .then(updatedEvent => updatedEvent)
+        .catch(error => { throw new SystemError(error.message) })
 }
 
 export default updateEvent

@@ -5,6 +5,8 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import Calendar from './components/Calendar'
 import CreateEvent from './components/CreateEvent'
 import Header from './common/Header'
+import EditEvent from './components/EditEvent'
+
 
 import { FaPlus } from "react-icons/fa";
 
@@ -24,6 +26,7 @@ function Home({ onUserLoggedOut }) {
     const [view, setView] = useState(viewInPath)
 
 
+
     useEffect(() => {
         switch (view) {
             case 'calendar':
@@ -31,6 +34,8 @@ function Home({ onUserLoggedOut }) {
                 break
             case 'create-event':
                 navigate('/create-event')
+                break
+            case 'edit-event':
                 break
         }
     }, [view])
@@ -42,7 +47,6 @@ function Home({ onUserLoggedOut }) {
     const handleCancelCreateEvent = () => setView('calendar')
 
     const handleLogoutButtonClick = () => onUserLoggedOut()
-
 
 
     console.log('Home -> render')
@@ -61,6 +65,10 @@ function Home({ onUserLoggedOut }) {
                     element={<CreateEvent
                         onEventCreated={handleEventCreated}
                         onCancel={handleCancelCreateEvent} />}
+                />
+
+                <Route path="/edit-event"
+                    element={<EditEvent />}
                 />
             </Routes>
 

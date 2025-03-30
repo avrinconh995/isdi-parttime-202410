@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getDaysOfMonthsWithEventsHandler, getEventsFromDayHandler, getEventHandler, createEventHandler, deleteEventHandler } from './handlers/index.js'
+import { getDaysOfMonthsWithEventsHandler, getEventsFromDayHandler, getEventHandler, createEventHandler, deleteEventHandler, updateEventHandler } from './handlers/index.js'
 import jsonBodyParser from '../../middlewares/jsonBodyParser.js'
 
 
@@ -11,5 +11,7 @@ router.get('/:eventId', getEventHandler)
 
 router.post('/', jsonBodyParser, createEventHandler)
 router.delete('/:eventId', deleteEventHandler)
+
+router.patch('/:eventId', jsonBodyParser, updateEventHandler)
 
 export default router

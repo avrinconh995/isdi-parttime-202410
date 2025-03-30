@@ -4,6 +4,7 @@ import getEventHandler from './getEventHandler.js'
 
 import createEventHandler from './createEventHandler.js'
 import deleteEventHandler from './deleteEventHandler.js'
+import updateEventHandler from './updateEventHandler.js'
 
 export {
     getDaysOfMonthsWithEventsHandler,
@@ -11,5 +12,6 @@ export {
     getEventHandler,
 
     createEventHandler,
-    deleteEventHandler
+    deleteEventHandler,
+    updateEventHandler
 }

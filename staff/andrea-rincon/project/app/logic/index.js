@@ -10,6 +10,7 @@ import getEventsFromDay from './getEventsFromDay'
 import createEvent from './createEvent'
 import deleteEvent from './deleteEvent'
 import getEvent from './getEvent'
+import updateEvent from './updateEvent'
 
 
 const logic = {
@@ -24,7 +25,8 @@ const logic = {
     getEventsFromDay,
     getEvent,
     createEvent,
-    deleteEvent
+    deleteEvent,
+    updateEvent
 
 }
 

@@ -76,7 +76,7 @@ Event
 - date (Date)
 
 ### Coverage
-![Code Coverage]()
+![Code Coverage](http://127.0.0.1:5500/staff/andrea-rincon/project/api/coverage/logic/index.html)
 
 ## Tasks
 

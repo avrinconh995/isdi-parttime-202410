@@ -9,6 +9,8 @@ function EventList({ year, month, day, onEventDeleted }) {
 
     const [dayEvents, setDayEvents] = useState([])
     const navigate = useNavigate()
+    const [view, setView] = useState(null)
+
 
     useEffect(() => {
         if (day === null || day === undefined) return; // Evita ejecutar con un día inválido
@@ -124,7 +126,6 @@ function EventList({ year, month, day, onEventDeleted }) {
             )}
         </div>
     </section>
+
 }
-
-
 export default EventList
