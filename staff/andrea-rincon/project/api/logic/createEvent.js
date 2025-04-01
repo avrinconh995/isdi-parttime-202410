@@ -19,7 +19,7 @@ const createEvent = (userId, children, title, date, description) => {
                 .catch(error => { throw new SystemError(error.message) })
                 .then(children1 => {
                     if (children1.length === 0) {
-                        const childrenInsertions = children.map(child => new Child({ name: child, parent: userId }).save())
+                        const childrenInsertions = children.map(child => new Child({ name: child.toLowerCase(), parent: userId }).save())
 
                         return Promise.all(childrenInsertions)
                             .catch(error => { throw new SystemError(error.message) })

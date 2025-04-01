@@ -13,7 +13,7 @@ export default (req, res, next) => {
 
         const { title, children, date, description } = req.body
 
-        logic.updateEvent(eventId, userId, title, children, new Date(date), description)
+        logic.updateEvent(userId, eventId, title, children, new Date(date), description)
             .then(() => res.status(204).send())
             .catch(error => next(error))
     } catch (error) {

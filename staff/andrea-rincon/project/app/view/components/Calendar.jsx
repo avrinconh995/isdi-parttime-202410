@@ -3,6 +3,9 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa"
 
 import logic from '../../logic'
 import EventList from './EventList'
+import EditEvent from './EditEvent'
+
+
 
 
 const getDaysInMonth = (year, month) => {
@@ -11,7 +14,7 @@ const getDaysInMonth = (year, month) => {
 
 const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
 
-function Calendar() {
+function Calendar({ onEditEvent }) {
     console.log('Calendar -> render')
 
     const [name, setName] = useState(null)
@@ -129,6 +132,11 @@ function Calendar() {
 
     }
 
+    const handleEditEvent = (eventId) => {
+        onEditEvent(eventId)
+    }
+
+
     return <section>
         <div className="flex flex-col justify-left w-full p-2 mt-6">
             <h2 className="font-happymonkey text-3xl font-bold text-darkblue mb-2 mx-2">
@@ -183,8 +191,6 @@ function Calendar() {
             </div>
 
 
-
-
             {/* encabezado calendario con el nombre del mes */}
             <div className="grid grid-cols-7 text-center font-semibold text-darkblue font-montserrat">
                 {daysOfWeek.map((day) => (
@@ -221,10 +227,11 @@ function Calendar() {
             </div>
         </div>
         <main className="space-y-6 mt-6">
-            <EventList year={year} month={month + 1} day={selectedDay} onEventDeleted={handleEventDeleted} />
+            <EventList year={year} month={month + 1} day={selectedDay} onEventDeleted={handleEventDeleted} onEditEvent={handleEditEvent} />
+
 
         </main>
-    </section>
+    </section >
 }
 
 export default Calendar

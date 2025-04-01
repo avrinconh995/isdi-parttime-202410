@@ -6,13 +6,10 @@ import Calendar from './components/Calendar'
 import CreateEvent from './components/CreateEvent'
 import Header from './common/Header'
 import EditEvent from './components/EditEvent'
-
-
 import { FaPlus } from "react-icons/fa";
 
 
-
-function Home({ onUserLoggedOut }) {
+function Home({ onUserLoggedOut, onEditEvent }) {
     console.log(' home-> render')
 
     const navigate = useNavigate()
@@ -20,12 +17,11 @@ function Home({ onUserLoggedOut }) {
 
     let viewInPath = location.pathname.slice(1)
 
-    if (viewInPath !== 'create-event')
-        viewInPath = 'calendar'
-
+    if (viewInPath !== 'create-event' && !viewInPath.startsWith('edit-event/')) {
+        viewInPath = 'calendar';
+    }
     const [view, setView] = useState(viewInPath)
-
-
+    const [eventId, setEventId] = useState(null)
 
     useEffect(() => {
         switch (view) {
@@ -36,9 +32,11 @@ function Home({ onUserLoggedOut }) {
                 navigate('/create-event')
                 break
             case 'edit-event':
-                break
+                navigate(`/edit-event/${eventId}`)
         }
     }, [view])
+
+
 
     const handleEventCreated = () => setView('calendar')
 
@@ -47,6 +45,20 @@ function Home({ onUserLoggedOut }) {
     const handleCancelCreateEvent = () => setView('calendar')
 
     const handleLogoutButtonClick = () => onUserLoggedOut()
+
+    const handleEditEvent = (eventId) => {
+        setView('edit-event')
+        setEventId(eventId)
+
+    }
+
+    const handleCancelEditEvent = () => {
+        setView('calendar')
+        setEventId(null)
+    }
+
+    const handleSuccessEditEvent = () => setView('calendar')
+
 
 
     console.log('Home -> render')
@@ -57,7 +69,7 @@ function Home({ onUserLoggedOut }) {
             <Routes>
                 <Route
                     path="/"
-                    element={<Calendar />}
+                    element={<Calendar onEditEvent={handleEditEvent} />}
                 />
 
                 <Route
@@ -67,13 +79,16 @@ function Home({ onUserLoggedOut }) {
                         onCancel={handleCancelCreateEvent} />}
                 />
 
-                <Route path="/edit-event"
-                    element={<EditEvent />}
+
+                <Route path="/edit-event/:id" element={<EditEvent
+                    onEditEvent={handleEditEvent}
+                    onCancel={handleCancelEditEvent}
+                    onSuccessEditEvent={handleSuccessEditEvent} />}
                 />
+
             </Routes>
 
-        </main>
-
+        </main >
         <footer className="flex justify-center items-center py-4">
             {location.pathname === '/' && (
                 <button
@@ -86,6 +101,7 @@ function Home({ onUserLoggedOut }) {
             )}
         </footer>
     </section >
+
 }
 
 export default Home

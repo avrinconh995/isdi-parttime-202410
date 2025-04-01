@@ -4,7 +4,8 @@ import { FaRegEdit } from "react-icons/fa"
 import { useNavigate } from 'react-router-dom'
 import logic from '../../logic'
 
-function EventList({ year, month, day, onEventDeleted }) {
+
+function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
     console.log('EventList -> render')
 
     const [dayEvents, setDayEvents] = useState([])
@@ -63,11 +64,9 @@ function EventList({ year, month, day, onEventDeleted }) {
 
     }
 
-
     const handleEditButtonClick = (eventId) => {
-        // Redirige a la ruta de edición con el ID del evento
-        navigate(`/edit-event/${eventId}`)
-    }
+        onEditEvent(eventId)
+    };
 
 
     return <section>
@@ -125,6 +124,8 @@ function EventList({ year, month, day, onEventDeleted }) {
                 </p>
             )}
         </div>
+
+
     </section>
 
 }

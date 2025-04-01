@@ -63,7 +63,7 @@ describe('updateEvent', () => {
             })
     })
     it('fails on wrong eventId', () => {
-        debugger
+
         let catchedError
 
         return User.create({ name: 'Carolina', email: 'caro@lina.com', password: '123123123' })

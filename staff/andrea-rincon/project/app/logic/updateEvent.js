@@ -1,9 +1,9 @@
 import { validate, errors } from 'com'
 
-const updateEvent = (eventId, children, title, date, description) => {
+const updateEvent = (eventId, title, children, date, description) => {
     validate.id(eventId, 'eventId')
-    validate.children(children)
     validate.title(title)
+    validate.children(children)
     validate.date(date)
     validate.description(description)
 
@@ -13,7 +13,7 @@ const updateEvent = (eventId, children, title, date, description) => {
             Authorization: `Bearer ${sessionStorage.token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ children, title, date, description })
+        body: JSON.stringify({ title, children, date, description })
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
