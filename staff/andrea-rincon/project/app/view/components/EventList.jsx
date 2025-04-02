@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
 import { FaRegEdit } from "react-icons/fa"
-import { useNavigate } from 'react-router-dom'
+
 import logic from '../../logic'
 
 
@@ -9,9 +9,7 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
     console.log('EventList -> render')
 
     const [dayEvents, setDayEvents] = useState([])
-    const navigate = useNavigate()
-    const [view, setView] = useState(null)
-
+    const [detailsEvent, setDetailsEvent] = useState(null)
 
     useEffect(() => {
         if (day === null || day === undefined) return; // Evita ejecutar con un día inválido
@@ -66,7 +64,8 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
 
     const handleEditButtonClick = (eventId) => {
         onEditEvent(eventId)
-    };
+    }
+
 
 
     return <section>
@@ -82,12 +81,16 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
                     ) : (
                         <ul>
                             {dayEvents.map((event, index) => (
+
                                 <li
                                     key={index}
-                                    className="flex items-center justify-between text-sm text-darkblue p-2 rounded-lg shadow-sm mb-2"
+                                    className="relative flex items-center justify-between text-sm text-darkblue p-2 rounded-lg shadow-sm mb-2"
+                                    onMouseEnter={() => setDetailsEvent(event)}
+                                    onMouseLeave={() => setDetailsEvent(null)}
                                 >
+
                                     {/* Nombre del evento y Niñas (children) */}
-                                    <div className="flex flex-1 items-center space-x-4 justify-between text-center">
+                                    <div className="flex flex-1 items-center space-x-4 justify-between text-center gap-4">
                                         <span className="font-semibold mr-4 text-center justify-start">{event.title}</span>
                                         <div className="flex flex-1 items-center justify-between">
                                             <span className="text-xs text-darkblue mr-2 font-normal">{event.children.join(', ')}</span>
@@ -112,6 +115,15 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
                                     >
                                         <MdDeleteForever />
                                     </button>
+
+                                    {detailsEvent?.id === event.id && (
+                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-2 bg-white border rounded-lg shadow-lg w-48 z-10">
+                                            <p className="font-semibold">{event.title}</p>
+                                            <p className="text-xs text-darkblue">{event.details}</p>
+                                            <p className="text-xs text-darkblue">{event.description}</p>
+                                        </div>
+                                    )}
+
 
                                 </li>
                             ))}

@@ -44,7 +44,7 @@ function Home({ onUserLoggedOut, onEditEvent }) {
 
     const handleCancelCreateEvent = () => setView('calendar')
 
-    const handleLogoutButtonClick = () => onUserLoggedOut()
+    const handleLogoutButtonClick = () => onUserLoggedOut('login')
 
     const handleEditEvent = (eventId) => {
         setView('edit-event')

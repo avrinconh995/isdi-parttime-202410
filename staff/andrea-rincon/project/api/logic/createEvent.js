@@ -15,7 +15,7 @@ const createEvent = (userId, children, title, date, description) => {
         .then(user => {
             if (!user) throw new NotFoundError('User not Found')
 
-            return Child.find({ name: { $in: children } })
+            return Child.find({ name: { $in: children.map(child => child.toLowerCase()) } })
                 .catch(error => { throw new SystemError(error.message) })
                 .then(children1 => {
                     if (children1.length === 0) {
@@ -31,10 +31,10 @@ const createEvent = (userId, children, title, date, description) => {
 
                             })
                     } else {
-                        const childrenNotInDB = children.filter(child => !children1.find(child1 => child1.name === child))
+                        const childrenNotInDB = children.filter(child => !children1.find(child1 => child1.name === child.toLowerCase()))
 
                         if (childrenNotInDB.length) {
-                            const childrenInsertions = childrenNotInDB.map(child => new Child({ name: child, parent: userId }).save())
+                            const childrenInsertions = childrenNotInDB.map(child => new Child({ name: child.toLowerCase(), parent: userId }).save())
 
                             return Promise.all(childrenInsertions)
                                 .catch(error => { throw new SystemError(error.message) })

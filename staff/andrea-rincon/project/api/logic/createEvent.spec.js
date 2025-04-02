@@ -26,7 +26,7 @@ describe('createEvent', () => {
             .then(user => {
                 return createEvent(
                     user._id.toString(),
-                    ['Alana', 'Agatha'],//child 
+                    ['alana', 'agatha'],//child 
                     'cita Dra Ana',//title
                     new Date(2025, 2, 24, 17, 0),//fecha
                     'preguntar por alergias'//nota
@@ -57,7 +57,7 @@ describe('createEvent', () => {
 
             .then(user => createEvent(
                 new ObjectId().toString(),
-                ['Alana', 'Agatha'],//child 
+                ['alana', 'agatha'],//child 
                 'cita medica',//title
                 new Date(2025, 2, 24, 17, 0),//fecha
                 'preguntar alergia al huevo'//nota
@@ -74,7 +74,7 @@ describe('createEvent', () => {
     it('creates an event with a single child', () => {
         return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
             .then(user => {
-                return createEvent(user._id.toString(), ['Alana'], 'cumple Vicente', new Date(2025, 5, 24, 17, 0), 'llevar regalo')
+                return createEvent(user._id.toString(), ['alana'], 'cumple Vicente', new Date(2025, 5, 24, 17, 0), 'llevar regalo')
             })
             .then(() => Event.findOne().populate('children'))
             .then(event => {
@@ -86,8 +86,8 @@ describe('createEvent', () => {
     it('creates an event with a new child', () => {
         return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
             .then(user => {
-                return createEvent(user._id.toString(), ['Peter'], 'Primera visita médica', new Date(2025, 6, 24, 14, 0), 'Revisión inicial')
-                    .then(() => Child.findOne({ name: 'Peter' }))
+                return createEvent(user._id.toString(), ['peter'], 'Primera visita médica', new Date(2025, 6, 24, 14, 0), 'Revisión inicial')
+                    .then(() => Child.findOne({ name: 'peter' }))
                     .then(child => {
                         expect(child).to.exist
                         expect(child.parent.toString()).to.equal(user._id.toString())
@@ -97,17 +97,17 @@ describe('createEvent', () => {
 
     it('creates an event with a mix of existing and new children', () => {
         return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
-            .then(user => Child.create({ name: 'Alana', parent: user._id }))
+            .then(user => Child.create({ name: 'alana', parent: user._id }))
             .then(() => {
                 return User.findOne({ email: 'carolina@carolina.com' })
-                    .then(user => createEvent(user._id.toString(), ['Alana', 'Peter'], 'Evento mixto', new Date(2025, 7, 24, 15, 0), 'Prueba de niños mixtos'))
+                    .then(user => createEvent(user._id.toString(), ['alana', 'peter'], 'Evento mixto', new Date(2025, 7, 24, 15, 0), 'Prueba de niños mixtos'))
                     .then(() => Event.findOne().populate('children'))
                     .then(event => {
                         expect(event).to.exist;
                         expect(event.children).to.have.lengthOf(2);
                         const childNames = event.children.map(child => child.name);
-                        expect(childNames).to.include.members(['Alana', 'Peter']);
-                        return Child.findOne({ name: 'Peter' });
+                        expect(childNames).to.include.members(['alana', 'peter']);
+                        return Child.findOne({ name: 'peter' });
                     }).then(childPeter => {
                         expect(childPeter).to.exist;
                     })
@@ -117,18 +117,18 @@ describe('createEvent', () => {
     it('creates an event with existing children', () => {
         return User.create({ name: 'Carolina', email: 'carolina@carolina.com', password: '123123123' })
             .then(user => Promise.all([
-                Child.create({ name: 'Alana', parent: user._id }),
-                Child.create({ name: 'Agatha', parent: user._id })
+                Child.create({ name: 'alana', parent: user._id }),
+                Child.create({ name: 'agatha', parent: user._id })
             ]))
             .then(() => {
                 return User.findOne({ email: 'carolina@carolina.com' })
-                    .then(user => createEvent(user._id.toString(), ['Alana', 'Agatha'], 'Evento mixto', new Date(2025, 7, 24, 15, 0), 'Prueba de niños mixtos'))
+                    .then(user => createEvent(user._id.toString(), ['alana', 'agatha'], 'Evento mixto', new Date(2025, 7, 24, 15, 0), 'Prueba de niños mixtos'))
                     .then(() => Event.findOne().populate('children'))
                     .then(event => {
                         expect(event).to.exist;
                         expect(event.children).to.have.lengthOf(2);
                         const childNames = event.children.map(child => child.name);
-                        expect(childNames).to.include.members(['Alana', 'Agatha']);
+                        expect(childNames).to.include.members(['alana', 'agatha']);
                     })
             })
     })

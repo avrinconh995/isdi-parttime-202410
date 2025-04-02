@@ -36,12 +36,12 @@ function Header({ onUserLoggedOut }) {
         </div>
 
         {/* Botón "Salir" con ícono arriba y texto abajo */}
-        <div className="flex flex-col items-center mt-2">
+        <div className="flex flex-col items-center mt-2" onClick={handleLogoutButtonClick}>
             <IoMdExit className="text-white text-3xl mb-1" />
             <button
                 className="text-white text-[10px] font-happymonkey font-bold"
                 type="button"
-                onClick={handleLogoutButtonClick}
+
             >
                 Salir
             </button>

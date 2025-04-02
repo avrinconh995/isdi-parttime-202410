@@ -21,6 +21,7 @@ const updateEvent = (userId, eventId, title, children, date, description) => {
             return Event.findById(eventId)
                 .catch(error => { throw new SystemError(error.message) })
                 .then(event => {
+                    console.log('event', event)
                     if (!event) throw new NotFoundError('Event not found')
 
                     // Verificar si el usuario es el autor del evento
@@ -29,27 +30,31 @@ const updateEvent = (userId, eventId, title, children, date, description) => {
                     }
 
 
-                    // convertir los nombres en ObjectId
-                    return Child.find({ 'name': { $in: children } })
-                        .then(validChildren => {
-                            if (validChildren.length !== children.length) {
+                    // buscar children por nombre
+                    return Child.find({ 'name': { $in: children.map(child => child.toLowerCase()) } })
+                        .then(foundChildren => {
+                            console.log(foundChildren)
+
+                            if (foundChildren.length !== children.length) {
                                 throw new SystemError('Some children name are invalid or do not exist')
                             }
 
-                            event.children = [...new Set(validChildren.map(child => child._id.toString()))]
+                            // Actualizar los nombres de los niños en el evento, manteniendo los IDs
+                            event.children = foundChildren.map(child => ({
+                                _id: child._id,
+                                name: child.name
+                            }));
 
-                            event.title = title
-                            event.date = new Date(date)
-                            event.description = description
+                            event.title = title;
+                            event.date = new Date(date);
+                            event.description = description;
 
                             return event.save()
-                                .catch(error => { throw new SystemError(error.message) })
-                        })
+                                .catch(error => { throw new SystemError(error.message); });
+                        });
                 })
                 .then(updatedEvent => updatedEvent)
-
         })
 }
-
 
 export default updateEvent

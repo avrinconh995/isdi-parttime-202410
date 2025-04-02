@@ -14,7 +14,7 @@ function CreateEvent({ onEventCreated, onCancel }) {
 
         try {
             logic.createEvent(children, title, date, description)
-                .then(() => onEventCreated())
+                .then(() => onEventCreated(date))
                 .catch(error => {
                     alert(error.message)
 

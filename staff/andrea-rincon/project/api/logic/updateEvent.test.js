@@ -6,11 +6,11 @@ mongoose.connect('mongodb://localhost:27017/calendar')
         try {
             updateEvent(
                 '67e2e8645b85bda088a98786', //userId        
-                '67e6e6b635b8e4ea128747e6',//eventId                                    
-                'Cita Dra Ana prueba 2', // title
-                ['Agatha'],//children
-                new Date(2025, 2, 29, 17, 0),//fecha
-                'prueba 3'//nota 
+                '67ec257b3797175ed4b98694',//eventId                                    
+                'Prueba', // title
+                ['Alana'],//children
+                new Date(2025, 3, 1, 17, 0),//fecha
+                'prueba 3prueba test'//nota 
 
             )
                 .then(result => console.log('update created', result))

@@ -2,9 +2,9 @@
 
 ## Intro
 
-Calendario - Agenda familiar que me permita crear diferentes eventos y poder llevar una organizacion con las ni;as peque;as texto en desarrollo....
+Calendario - MiLittleCal was born out of the need to efficiently organize all the activities and events for my daughters. This tool allows you to create, edit, and delete events easily, ensuring that no doctor’s appointment, school activity, or special moment is ever missed. With an intuitive and practical design, MiLittleCal makes managing family life simple and efficient, even on the busiest days.
 
-![Poner imagen aqui titulo](https://cloudfront-us-east-1.images.arcpublishing.com/infobae/6LKSK3L3SZE4TMHDU4I37QZIBE.jpg)
+![Overwhelmed Mom Juggling Family Chaos](https://sdmntprwestus.oaiusercontent.com/files/00000000-47b4-5230-a2d4-e9b954e0764d/raw?se=2025-04-02T18%3A44%3A36Z&sp=r&sv=2024-08-04&sr=b&scid=01f3d022-a8c8-5f76-b7d3-80e98e51c7a4&skoid=51916beb-8d6a-49b8-8b29-ca48ed86557e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-02T16%3A06%3A57Z&ske=2025-04-03T16%3A06%3A57Z&sks=b&skv=2024-08-04&sig=VXVAYFejQdukVNT6hPP9L%2BXygU/c46iduxWUEK0vD1Q%3D)
 
 ## Functional
 
@@ -29,9 +29,9 @@ User
     - Calendar
         - Event List
     - Create Event
-    - View Event
+    - Edit Event
 
-[Figma]()
+[Figma](https://www.figma.com/design/xGP5aGUHmWJpdDuCZcgSCQ/Untitled?node-id=1-2&p=f&t=MKfVtxfkh91OW6ML-0)
 
 ## Technical
 
@@ -76,8 +76,7 @@ Event
 - date (Date)
 
 ### Coverage
-![Code Coverage](http://127.0.0.1:5500/staff/andrea-rincon/project/api/coverage/logic/index.html)
-
+![Code Coverage]![alt text](image.png)
 ## Tasks
 
 [GitHub] (https://github.com/b00tc4mp/isdi-parttime-202410/issues/49)
