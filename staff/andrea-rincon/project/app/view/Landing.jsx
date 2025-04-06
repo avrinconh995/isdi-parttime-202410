@@ -4,12 +4,12 @@ function Landing({ onLoginClicked, onRegisterClicked }) {
     const handleLoginClick = (event) => {
         event.preventDefault()
         onLoginClicked()
-    };
+    }
 
     const handleRegisterLinkClick = (event) => {
         event.preventDefault()
         onRegisterClicked()
-    };
+    }
 
     return (
         <main className="main justify-center" >

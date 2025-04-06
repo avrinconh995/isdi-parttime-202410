@@ -9,7 +9,7 @@ const getChildren = (userId) => {
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new NotFoundError('User not Found')
+            if (!user) throw new NotFoundError('Usuario no encontrado')
 
             return Child.find({
                 parent: userId

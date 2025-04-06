@@ -12,7 +12,7 @@ const getEventsFromDay = (userId, year, month, day) => {
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new NotFoundError('User not Found')
+            if (!user) throw new NotFoundError('Usuario no encontrado')
 
             const startDate = new Date(year, month - 1, day, 0, 0, 0, 0)
             const endDate = new Date(year, month - 1, day, 23, 59, 59, 999)

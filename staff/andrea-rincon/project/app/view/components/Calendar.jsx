@@ -3,10 +3,8 @@ import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa"
 
 import logic from '../../logic'
 import EventList from './EventList'
-import EditEvent from './EditEvent'
 
-
-
+import { useCalendarContext } from '../../context'
 
 const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate()
@@ -17,6 +15,8 @@ const daysOfWeek = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
 function Calendar({ onEditEvent }) {
     console.log('Calendar -> render')
 
+    const { alert } = useCalendarContext()
+
     const [name, setName] = useState(null)
     const [currentDate, setCurrentDate] = useState(new Date())
     const [daysWithEvents, setDaysWithEvents] = useState([])
@@ -24,7 +24,6 @@ function Calendar({ onEditEvent }) {
     const [showYearSelector, setShowYearSelector] = useState(false)
 
     useEffect(() => {
-        console.log('Home-> NAME')
 
         try {
             logic.getUserName()
@@ -50,8 +49,6 @@ function Calendar({ onEditEvent }) {
     const firstDay = new Date(year, month, 1).getDay()
     const adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1
 
-
-
     const nextMonth = () => {
         setCurrentDate((prevDate) => {
             let newYear = prevDate.getFullYear()
@@ -61,8 +58,8 @@ function Calendar({ onEditEvent }) {
                 newMonth = 0
             }
             const newDate = new Date(newYear, newMonth, 1);
-            // if (newDate.getMonth() === prevDate.getMonth()) return prevDate;
-            console.log('Mes anterior:', newDate)
+
+            // console.log('Mes anterior:', newDate)
             return newDate
         })
     }
@@ -76,8 +73,8 @@ function Calendar({ onEditEvent }) {
                 newMonth = 11
             }
             const newDate = new Date(newYear, newMonth, 1);
-            // if (newDate.getMonth() === prevDate.getMonth()) return prevDate;
-            console.log('Mes anterior:', newDate)
+
+            // console.log('Mes anterior:', newDate)
             return newDate
         })
     }
@@ -112,7 +109,7 @@ function Calendar({ onEditEvent }) {
 
     const handleSelectDay = (day) => {
         setSelectedDay(day)
-        console.log('dia seleccionado', day)
+        // console.log('dia seleccionado', day)
 
     }
 
@@ -135,7 +132,6 @@ function Calendar({ onEditEvent }) {
     const handleEditEvent = (eventId) => {
         onEditEvent(eventId)
     }
-
 
     return <section>
         <div className="flex flex-col justify-left w-full p-2 mt-6">

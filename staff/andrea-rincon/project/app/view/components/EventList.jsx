@@ -3,20 +3,23 @@ import { MdDeleteForever } from 'react-icons/md'
 import { FaRegEdit } from "react-icons/fa"
 
 import logic from '../../logic'
+import { useCalendarContext } from '../../context'
 
 
 function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
-    console.log('EventList -> render')
+    // console.log('EventList -> render')
+
+    const { alert, confirm } = useCalendarContext()
 
     const [dayEvents, setDayEvents] = useState([])
     const [detailsEvent, setDetailsEvent] = useState(null)
 
     useEffect(() => {
         if (day === null || day === undefined) return; // Evita ejecutar con un día inválido
-        console.log('day events', year, month, day);
+        // console.log('day events', year, month, day)
 
         loadDayEvents(year, month, day);
-    }, [year, month, day]);
+    }, [year, month, day])
 
 
     const loadDayEvents = (year, month, day) => {
@@ -41,24 +44,26 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
     }
 
     const handleDeleteButtonClick = (eventid) => {
-        if (window.confirm('¿Eliminar este evento?'))
-            try {
-                logic.deleteEvent(eventid)
-                    .then(() => {
-                        onEventDeleted()
-                        loadDayEvents(year, month, day)
-                    })
+        confirm('¿Seguro que quieres eliminar este evento?', accepted => {
+            if (accepted)
+                try {
+                    logic.deleteEvent(eventid)
+                        .then(() => {
+                            onEventDeleted()
+                            loadDayEvents(year, month, day)
+                        })
 
-                    .catch(error => {
-                        alert(error.message)
+                        .catch(error => {
+                            alert(error.message)
 
-                        console.error(error)
-                    })
-            } catch (error) {
-                alert(error.message)
+                            console.error(error)
+                        })
+                } catch (error) {
+                    alert(error.message)
 
-                console.error(error)
-            }
+                    console.error(error)
+                }
+        })
 
     }
 
@@ -66,77 +71,82 @@ function EventList({ year, month, day, onEventDeleted, onEditEvent }) {
         onEditEvent(eventId)
     }
 
-
-
     return <section>
 
-        {/* Mostrar los eventos del día seleccionado */}
+        {/* Mostrar los eventos del día seleccionado  */}
         <div className="font-montserrat max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg">
             {day ? (
                 <>
-                    <h3 className="text-lg  text-center capitalize text-darkblue mb-4 font-bold">Eventos</h3>
+                    <h3 className="text-lg  text-center  text-darkblue mb-4 font-bold">Eventos del día</h3>
 
                     {dayEvents.length === 0 ? (
-                        <p className="text-lg text-center capitalize text-darkblue">No hay eventos</p>
+                        <p className="text-lg text-center  text-darkblue">No hay eventos</p>
                     ) : (
                         <ul>
                             {dayEvents.map((event, index) => (
 
                                 <li
                                     key={index}
-                                    className="relative flex items-center justify-between text-sm text-darkblue p-2 rounded-lg shadow-sm mb-2"
-                                    onMouseEnter={() => setDetailsEvent(event)}
-                                    onMouseLeave={() => setDetailsEvent(null)}
-                                >
+                                    className="relative flex items-center justify-between text-sm text-darkblue p-3 rounded-lg shadow-sm mb-2 bg-white hover:bg-blue-50 transition-all duration-200">
 
-                                    {/* Nombre del evento y Niñas (children) */}
-                                    <div className="flex flex-1 items-center space-x-4 justify-between text-center gap-4">
-                                        <span className="font-semibold mr-4 text-center justify-start">{event.title}</span>
-                                        <div className="flex flex-1 items-center justify-between">
-                                            <span className="text-xs text-darkblue mr-2 font-normal">{event.children.join(', ')}</span>
+                                    <div className="flex items-start justify-between w-full gap-2 ">
+                                        <span className="font-semibold text-left  cursor-pointer hover:underline break-words flex-1"
+                                            onMouseEnter={() => setDetailsEvent(event)}
+                                            onMouseLeave={() => setDetailsEvent(null)}
+                                        >
+                                            {event.title}
+                                        </span>
+
+                                        <div className="flex flex-col items-end gap-1">
+                                            <span className="text-sm text-darkblue font-normal  max-w-full capitalize break-words text-right">
+                                                {event.children.join(', ')}
+                                            </span>
+
+
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-xs text-darkblue font-normal whitespace-nowrap">
+                                                    {event.date.toLocaleTimeString().slice(0, 5)}
+                                                </span>
+
+                                                <button
+                                                    className="text-darkblue hover:text-darkblue"
+                                                    type="button"
+                                                    onClick={() => handleEditButtonClick(event.id)}
+                                                >
+                                                    <FaRegEdit />
+                                                </button>
+
+                                                <button
+                                                    className="text-darkblue hover:text-darkblue"
+                                                    type="button"
+                                                    onClick={() => handleDeleteButtonClick(event.id)}
+                                                >
+                                                    <MdDeleteForever />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {/* Hora centrada */}
-                                    <span className="text-xs text-darkblue ml-auto mr-4 text-left font-normal justify-between">{event.date.toLocaleTimeString().slice(0, 5)}</span>
-
-                                    {/* Botón de eliminar alineado a la derecha */}
-                                    <button
-                                        className="text-darkblue text-xl ml-4 font-bold"
-                                        type="button"
-                                        onClick={() => handleEditButtonClick(event.id)}
-                                    >
-                                        <FaRegEdit />
-                                    </button>
-                                    <button
-                                        className="text-darkblue text-xl ml-4 font-normal"
-                                        type="button"
-                                        onClick={() => handleDeleteButtonClick(event.id)}
-                                    >
-                                        <MdDeleteForever />
-                                    </button>
-
+                                    {/* Tooltip solo cuando el mouse está sobre el título */}
                                     {detailsEvent?.id === event.id && (
-                                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-2 bg-white border rounded-lg shadow-lg w-48 z-10">
-                                            <p className="font-semibold">{event.title}</p>
-                                            <p className="text-xs text-darkblue">{event.details}</p>
-                                            <p className="text-xs text-darkblue">{event.description}</p>
+                                        <div className="absolute left-0 top-full mt-1 p-2 bg-white border rounded-lg shadow-lg w-64 z-10 font-montserrat text-darkblue text-sm">
+
+                                            <p className="font-bold "> {event.title}</p>
+
+                                            <p className="font-normal "> {event.description}</p>
                                         </div>
                                     )}
-
-
                                 </li>
                             ))}
                         </ul>
                     )}
                 </>
             ) : (
-                <p className="text-center text-darkblue font-montserrat">
+                <p className="text-center text-darkblue font-montserrat font-bold text-m ">
                     Selecciona un día para ver los eventos
                 </p>
             )}
         </div>
-
 
     </section>
 

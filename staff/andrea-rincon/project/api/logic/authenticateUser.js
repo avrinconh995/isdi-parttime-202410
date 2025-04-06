@@ -13,12 +13,12 @@ const authenticateUser = (email, password) => {
     return User.findOne({ email })
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new CredentialsError('wrong credentials')
+            if (!user) throw new CredentialsError('Usuario incorrecto')
 
             return bcrypt.compare(password, user.password)
                 .catch(error => { throw new SystemError(error.message) })
                 .then(match => {
-                    if (!match) throw new CredentialsError('wrong credentials')
+                    if (!match) throw new CredentialsError('Contraseña incorrecta')
 
                     return user._id.toString()
                 })

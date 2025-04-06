@@ -59,8 +59,6 @@ function Home({ onUserLoggedOut, onEditEvent }) {
 
     const handleSuccessEditEvent = () => setView('calendar')
 
-
-
     console.log('Home -> render')
 
     return <section className="main mb2">

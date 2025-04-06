@@ -13,7 +13,7 @@ const createEvent = (userId, children, title, date, description) => {
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new NotFoundError('User not Found')
+            if (!user) throw new NotFoundError('Usuario no encontrado')
 
             return Child.find({ name: { $in: children.map(child => child.toLowerCase()) } })
                 .catch(error => { throw new SystemError(error.message) })

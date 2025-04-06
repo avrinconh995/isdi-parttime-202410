@@ -5,24 +5,28 @@ import { errors } from 'com'
 const { NotFoundError, SystemError } = errors
 
 import { IoMenu } from "react-icons/io5"
-import { IoMdExit } from "react-icons/io";
+import { IoMdExit } from "react-icons/io"
+import { useCalendarContext } from '../../context'
 
 
 function Header({ onUserLoggedOut }) {
-    console.log('header -')
+    // console.log('header -')
+    const { confirm } = useCalendarContext()
 
     const handleLogoutButtonClick = () => {
-        try {
-            logic.logoutUser()
+        confirm('¿Seguro que quieres salir?', accepted => {
+            if (accepted)
+                try {
+                    logic.logoutUser()
 
-            onUserLoggedOut()
-        } catch (error) {
-            alert(error.message)
+                    onUserLoggedOut()
+                } catch (error) {
+                    alert(error.message)
 
-            console.error(error)
-        }
+                    console.error(error)
+                }
+        })
     }
-
 
     return <div className="bg-mediumblue w-full flex items-center justify-between px-6 py-4">
         {/* Menú a la izquierda */}

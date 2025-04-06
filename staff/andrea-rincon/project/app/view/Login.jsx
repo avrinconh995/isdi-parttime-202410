@@ -3,9 +3,13 @@ import { errors } from 'com'
 
 const { CredentialsError, SystemError } = errors
 
+import { useCalendarContext } from '../context'
+
 
 function Login({ onUserLoggedIn, onRegisterClicked }) {
-    console.log('Login -> render')
+    // console.log('Login -> render')
+
+    const { alert } = useCalendarContext()
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -26,7 +30,7 @@ function Login({ onUserLoggedIn, onRegisterClicked }) {
                     if (error instanceof CredentialsError)
                         alert(error.message)
                     else if (error instanceof SystemError)
-                        alert('Sorry, try againt later!')
+                        alert('Lo siento, intentalo mas tarde')
                 })
         } catch (error) {
             alert(error.message)

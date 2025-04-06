@@ -10,13 +10,13 @@ const deleteEvent = (userId, eventId) => {
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new NotFoundError('User not Found')
+            if (!user) throw new NotFoundError('Usuario no encontrado')
 
             return Event.findOneAndDelete({ _id: eventId, author: userId })
                 .catch(error => { throw new SystemError(error.message) })
         })
         .then(event => {
-            if (!event) throw new NotFoundError('Event not Found')
+            if (!event) throw new NotFoundError('Evento no encontrado')
         })
 }
 export default deleteEvent

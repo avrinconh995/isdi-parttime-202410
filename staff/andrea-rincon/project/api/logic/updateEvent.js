@@ -15,28 +15,28 @@ const updateEvent = (userId, eventId, title, children, date, description) => {
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
-            if (!user) throw new NotFoundError('User not found')
+            if (!user) throw new NotFoundError('Usuario no encontrado')
 
 
             return Event.findById(eventId)
                 .catch(error => { throw new SystemError(error.message) })
                 .then(event => {
-                    console.log('event', event)
-                    if (!event) throw new NotFoundError('Event not found')
+                    // console.log('event', event)
+                    if (!event) throw new NotFoundError('Evento no encontrado')
 
                     // Verificar si el usuario es el autor del evento
                     if (event.author.toString() !== userId) {
-                        throw new SystemError('User is not the author of the event')
+                        throw new SystemError('El usuario no es el author del evento')
                     }
 
 
                     // buscar children por nombre
                     return Child.find({ 'name': { $in: children.map(child => child.toLowerCase()) } })
                         .then(foundChildren => {
-                            console.log(foundChildren)
+                            // console.log(foundChildren)
 
                             if (foundChildren.length !== children.length) {
-                                throw new SystemError('Some children name are invalid or do not exist')
+                                throw new SystemError('Verifica el nombre,  no es  válido o no existe')
                             }
 
                             // Actualizar los nombres de los niños en el evento, manteniendo los IDs

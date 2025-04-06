@@ -1,6 +1,9 @@
+import { useCalendarContext } from '../../context'
 import logic from '../../logic'
 
 function CreateEvent({ onEventCreated, onCancel }) {
+
+    const { alert, confirm } = useCalendarContext()
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -29,7 +32,12 @@ function CreateEvent({ onEventCreated, onCancel }) {
 
     }
 
-    const handleCancelButtonClick = () => onCancel()
+    const handleCancelButtonClick = () => {
+        confirm('¿Seguro que quieres salir?', accepted => {
+            if (accepted)
+                onCancel()
+        })
+    }
 
     console.log('CreateEvent -> render')
 
@@ -72,10 +80,7 @@ function CreateEvent({ onEventCreated, onCancel }) {
                 </div>
             </div>
         </form>
-
     </main>
-
-
 }
 
 export default CreateEvent

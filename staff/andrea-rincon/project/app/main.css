@@ -45,6 +45,6 @@
     }
 
     .label {
-        @apply font-montserrat font-semibold block text-lg text-center text-darkblue;
+        @apply font-montserrat font-semibold block text-xl text-center text-darkblue;
     }
 }

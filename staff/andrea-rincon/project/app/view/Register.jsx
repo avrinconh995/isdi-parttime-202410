@@ -1,3 +1,4 @@
+import { useCalendarContext } from '../context'
 import logic from '../logic'
 
 import { errors } from 'com'
@@ -5,6 +6,8 @@ const { DuplicityError, SystemError } = errors
 
 function Register({ onUserRegistered, onLoginClicked }) {
     console.log('Register -> render')
+
+    const { alert } = useCalendarContext()
 
     const handleFormSubmit = event => {
         event.preventDefault()

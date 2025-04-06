@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import logic from '../../logic'
+import { useCalendarContext } from '../../context'
 
 function EditEvent({ onCancel, onSuccessEditEvent }) {
-    console.log('editEvent')
+    // console.log('editEvent')
 
+    const { alert, confirm } = useCalendarContext()
     const { id: eventId } = useParams()
-    console.log(eventId)
+    // console.log(eventId)
 
     const [event, setEvent] = useState(null)
 
-
     useEffect(() => {
-        console.log(`Editando evento con ID: ${eventId}`);
-        loadEvent(eventId);
-    }, [eventId]);
+        // console.log(`Editando evento con ID: ${eventId}`);
+        loadEvent(eventId)
+    }, [eventId])
 
     const loadEvent = (eventId) => {
         if (!eventId) {
-            return;
+            return
         }
         try {
             logic.getEvent(eventId)
@@ -69,10 +70,12 @@ function EditEvent({ onCancel, onSuccessEditEvent }) {
 
     }
     const handleCancelEditButtonClick = (event) => {
-        event.preventDefault()
-        onCancel()
+        confirm('¿Seguro que quieres salir?', accepted => {
+            if (accepted)
+                event.preventDefault()
+            onCancel()
+        })
     }
-
 
     return <main className="main mb-2">
 
@@ -82,11 +85,11 @@ function EditEvent({ onCancel, onSuccessEditEvent }) {
 
 
         <form className="form " onSubmit={handleEditFormSubmit}>
-            <label className="label" htmlFor="title">Titulo</label>
+            <label className="label mt-4" htmlFor="title">Título</label>
             <input className="input mt-2" type="text" id="title" defaultValue={event?.title || ''} />
 
             <label className="label" htmlFor="children">Hij@(s)</label>
-            <input className="input mt-2" type="text" id="children"
+            <input className="input mt-2 capitalize" type="text" id="children"
                 defaultValue={event?.children?.map(child => child.name).join(' ') || ''} />
 
             <label className="label" htmlFor="date">Fecha y Hora  </label>
@@ -117,7 +120,7 @@ function EditEvent({ onCancel, onSuccessEditEvent }) {
 
     </main>
 
-
 }
 
 export default EditEvent
+

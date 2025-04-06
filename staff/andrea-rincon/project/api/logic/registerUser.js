@@ -18,7 +18,7 @@ const registerUser = (name, email, password) => {
             return User.create({ name, email, password: hash })
                 .catch(error => {
                     if (error.code === 11000)
-                        throw new DuplicityError('User already exists')
+                        throw new DuplicityError('El usuario ya existe')
                     throw new SystemError(error.message)
                 })
         })
