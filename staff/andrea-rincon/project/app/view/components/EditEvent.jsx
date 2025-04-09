@@ -48,25 +48,31 @@ function EditEvent({ onCancel, onSuccessEditEvent }) {
         const description = form.description.value.trim() || undefined
 
         console.log('event', eventId)
+        try {
+            logic.updateEvent(eventId, title, children, date, description)
+                .then(() => {
+                    setEvent(prevEvent => ({
+                        ...prevEvent,
+                        title,
+                        children,
+                        date,
+                        description
+                    }))
 
-        logic.updateEvent(eventId, title, children, date, description)
-            .then(() => {
-                setEvent(prevEvent => ({
-                    ...prevEvent,
-                    title,
-                    children,
-                    date,
-                    description
-                }))
+                    form.reset()
 
-                form.reset()
+                    onSuccessEditEvent()
+                })
+                .catch(error => {
+                    alert(error.message)
+                    console.error(error)
+                })
 
-                onSuccessEditEvent()
-            })
-            .catch(error => {
-                alert(error.message)
-                console.error(error)
-            })
+        } catch (error) {
+            alert(error.message)
+            console.error(error)
+
+        }
 
     }
     const handleCancelEditButtonClick = (event) => {

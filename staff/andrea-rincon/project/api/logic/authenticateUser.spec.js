@@ -44,7 +44,7 @@ describe('authenticateUser', () => {
             .catch(error => catchedError = error)
             .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError)
-                expect(catchedError.message).to.be.equal('wrong credentials')
+                expect(catchedError.message).to.be.equal('Usuario incorrecto')
             })
     })
 
@@ -57,7 +57,7 @@ describe('authenticateUser', () => {
             .catch(error => catchedError = error)
             .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError)
-                expect(catchedError.message).to.equal('wrong credentials')
+                expect(catchedError.message).to.equal('Contraseña incorrecta')
             })
 
     })

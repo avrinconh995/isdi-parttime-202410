@@ -98,7 +98,7 @@ describe('updateEvent', () => {
             .finally(() => {
                 expect(errorCapturado).to.exist;
                 expect(errorCapturado).to.be.instanceOf(NotFoundError)
-                expect(errorCapturado.message).to.equal('Event not found')
+                expect(errorCapturado.message).to.equal('Evento no encontrado')
             });
     });
 

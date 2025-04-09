@@ -71,7 +71,7 @@ describe('getEvent', () => {
             .catch(error => catchedError = error)
             .finally(() => {
                 expect(catchedError).to.be.instanceOf(NotFoundError)
-                expect(catchedError.message).to.equal('User not Found')
+                expect(catchedError.message).to.equal('Usuario no encontrado')
             })
     })
 
